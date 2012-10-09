@@ -1,4 +1,14 @@
-# Django settings for espectros_microzonas project.
+# Django settings for webapp project.
+# Import global settings to make it easier to extend settings.
+from django.conf.global_settings import *
+
+
+#============================================================
+# Generic Django Settings
+#============================================================
+
+# Python dotted path to the WSGI application used by Django's runserver.
+WSGI_APPLICATION = 'espectros_microzonas.wsgi.application'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -9,64 +19,53 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = 'p-&amp;wag@jn_u)yr%s))q7d5-x@@-13!yr*ds;kf49d;sf;sd{asdc::9]]494j'
 
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# In a Windows environment this must be set to your system time zone.
+#============================================================
+# Calculation of directories relative to the module location
+#============================================================
+
+import os, sys
+
+PROJECT_DIR, SITE_ROOT = os.path.split(
+                            os.path.dirname(os.path.realpath(__file__))
+                        )
+
+VAR_ROOT = os.path.join(os.path.split(PROJECT_DIR)[0], 'var')
+if not os.path.exists(VAR_ROOT):
+    os.mkdir(VAR_ROOT)
+
+#============================================================
+# Time and Language Settings.
+#============================================================
+
 TIME_ZONE = 'America/Chicago'
-
-# Language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
-
+LANGUAGE_CODE = 'es-ve'
 SITE_ID = 1
-
-# If you set this to False, Django will make some optimizations so as not
-# to load the internationalization machinery.
 USE_I18N = True
-
-# If you set this to False, Django will not format dates, numbers and
-# calendars according to the current locale.
 USE_L10N = True
+USE_TZ = False
 
-# If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = True
 
-# Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+#============================================================
+# Project URLs and media Settings.
+#============================================================
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash.
-# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+ROOT_URLCONF = 'espectros_microzonas.urls'
 
-# Absolute path to the directory static files should be collected to.
-# Don't put anything in this directory yourself; store your static files
-# in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+LOGIN_URL = 'login'
+LOGOUT_URL = '/logout/'
+LOGIN_REDIRECT_URL = ''
 
-# URL prefix for static files.
-# Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
+MEDIA_URL = 'uploads'
 
-# Additional locations of static files
+STATIC_ROOT = os.path.join(VAR_ROOT, 'static')
+MEDIA_ROOT = os.path.join(VAR_ROOT, 'media')
+
 STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_DIR, 'static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -74,18 +73,24 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'p-&amp;wag@jn_u)yr%s))q7d5-x@@-13!yr*9^m6&amp;r_+ecj_e-vie'
+#============================================================
+# Template Settings
+#============================================================
 
-# List of callables that know how to import templates from various sources.
+TEMPLATE_DIRS = (
+    os.path.join(PROJECT_DIR, 'templates'),
+)
+
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
 )
+
+#============================================================
+# Middleware
+#============================================================
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -97,16 +102,31 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'espectros_microzonas.urls'
 
-# Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'espectros_microzonas.wsgi.application'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
+#=====================================================================
+# Database. Default settings ONLY. All development settings must be 
+# defined in conf.local.settings
+#=====================================================================
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '',                      # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
+#==========================================================================
+# Applications settings
+#==========================================================================
+
+#==========================================================================
+# Installed Apps. All dev-only apps must be defined in conf.local.settings
+#==========================================================================
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -121,11 +141,16 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
+#============================================================
+# Logging
+#============================================================
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -149,3 +174,15 @@ LOGGING = {
         },
     }
 }
+
+#============================================================
+# Local Settings
+#============================================================
+
+
+import sys
+
+try:
+    from espectros_microzonas.conf.local.settings import *
+except sys.exc_info()[0], e:
+    pass
