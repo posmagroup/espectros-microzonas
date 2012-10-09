@@ -1,0 +1,15 @@
+*.pyc
+docs/_build/*
+uploads
+
+*/*/conf/local/*.py
+
+dev.db
+var/
+env/
+*.swp
+
+# compass annoying folders
+.sass-cache
+generated/
+server_logs/
