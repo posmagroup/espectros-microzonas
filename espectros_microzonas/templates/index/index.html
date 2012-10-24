@@ -15,6 +15,24 @@
 <script>
     $(document).ready(function(){
         var map = new OpenLayers.Map('map');
+
+        capa1 = new OpenLayers.Layer.WMS(
+                "General",
+                "http://localhost:8080/geoserver/wms",
+                {
+                    layers: 'microzonas:Microzonas_Amenaza_General'
+                }
+        );
+        capa2 = new OpenLayers.Layer.WMS(
+                "Laderas",
+                "http://localhost:8080/geoserver/wms",
+                {
+                    layers: 'microzonas:Microzonas_Laderas'
+                }
+        );
+        map.addLayer(capa1);
+        map.addLayer(capa2);
+        map.zoomToMaxExtent()
     });
 </script>
 {% endblock %}
