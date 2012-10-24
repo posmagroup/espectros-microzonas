@@ -1,22 +1,24 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
-{% block title %}Prueba de OpenLayers{% endblock %}
-
-{% block style %}
-#map {
-    width: 600px;
-    height: 450px;
-    border: 1px solid black;
-}
+{% block extracss %}
+<style>
+    #map {
+        width: 600px;
+        height: 450px;
+        border: 1px solid black;
+    }
+</style>
 {% endblock %}
 
-{% block script %}
+{% block extrajs %}
+<script src="http://openlayers.org/dev/OpenLayers.js"></script>
+<script>
     $(document).ready(function(){
         var map = new OpenLayers.Map('map');
     });
+</script>
 {% endblock %}
 
-
-{% block body %}
-    <div id="map"></div>
+{% block content %}
+<div id="map"></div>
 {% endblock %}
