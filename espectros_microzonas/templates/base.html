@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="{{ STATIC_URL }}css/stylesheet.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 
-        {% block extrajs %}
+        {% block extracss %}
             {% comment %}
                 Put here your extra for each page.
             {% endcomment %}
@@ -28,8 +28,6 @@
         <!--[if lt IE 8]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-
-        
 
         {% block content%}
 
@@ -46,5 +44,11 @@
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
+
+        {% block extrajs %}
+            {% comment %}
+                Put here your extra for each page.
+            {% endcomment %}
+        {% endblock %}
     </body>
 </html>

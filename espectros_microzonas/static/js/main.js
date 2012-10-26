@@ -11,7 +11,7 @@ window.map = { }
 
 
 // window.charts namespace for the chart-related functions.
-window.charts = {}
+window.charts = {  }
 
 
 // global functions. 

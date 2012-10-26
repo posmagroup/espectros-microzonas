@@ -1,12 +1,42 @@
 {% extends 'base.html' %}
 
-{% block extrajs %}
-        <script src="http://openlayers.org/dev/OpenLayers.js"</script>
+{% block extracss %}
+<style>
+    #map {
+        width: 600px;
+        height: 450px;
+        border: 1px solid black;
+    }
+</style>
 {% endblock %}
 
+{% block extrajs %}
+<script src="http://openlayers.org/dev/OpenLayers.js"></script>
+<script>
+    $(document).ready(function(){
+        var map = new OpenLayers.Map('map');
+
+        capa1 = new OpenLayers.Layer.WMS(
+                "General",
+                "http://localhost:8080/geoserver/wms",
+                {
+                    layers: 'microzonas:Microzonas_Amenaza_General'
+                }
+        );
+        capa2 = new OpenLayers.Layer.WMS(
+                "Laderas",
+                "http://localhost:8080/geoserver/wms",
+                {
+                    layers: 'microzonas:Microzonas_Laderas'
+                }
+        );
+        map.addLayer(capa1);
+        map.addLayer(capa2);
+        map.zoomToMaxExtent()
+    });
+</script>
+{% endblock %}
 
 {% block content %}
-
-Hola Mundo
-
+<div id="map"></div>
 {% endblock %}
