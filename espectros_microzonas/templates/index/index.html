@@ -30,8 +30,17 @@
                     layers: 'microzonas:Microzonas_Laderas'
                 }
         );
-        map.addLayer(capa1);
+        capa3 = new OpenLayers.Layer.WMS(
+                "Sedimentos",
+                "http://localhost:8080/geoserver/wms",
+                {
+                    layers: 'microzonas:Microzonas_Sedimentos'
+                }
+        );
+
+        //map.addLayer(capa1);
         map.addLayer(capa2);
+        map.addLayer(capa3);
         map.zoomToMaxExtent()
     });
 </script>
