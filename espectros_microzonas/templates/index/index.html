@@ -19,16 +19,16 @@
         capa1 = new OpenLayers.Layer.WMS(
                 "General",
                 "http://localhost:8080/geoserver/wms",
-                {
-                    layers: 'microzonas:Microzonas_Amenaza_General'
-                }
+                {   layers: 'microzonas:Microzonas_Amenaza_General',
+                    transparent: "true",
+                    format: "image/png"  }
         );
         capa2 = new OpenLayers.Layer.WMS(
                 "Laderas",
                 "http://localhost:8080/geoserver/wms",
-                {
-                    layers: 'microzonas:Microzonas_Laderas'
-                }
+                {   layers: 'microzonas:Microzonas_Laderas',
+                    transparent: "true",
+                    format: "image/png"  }
         );
         capa3 = new OpenLayers.Layer.WMS(
                 "Sedimentos",
@@ -38,9 +38,7 @@
                 }
         );
 
-        //map.addLayer(capa1);
-        map.addLayer(capa2);
-        map.addLayer(capa3);
+        map.addLayers([capa1,capa2]);
         map.zoomToMaxExtent()
     });
 </script>
