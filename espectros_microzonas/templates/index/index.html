@@ -16,30 +16,26 @@
     $(document).ready(function(){
         var map = new OpenLayers.Map('map');
 
-        capa1 = new OpenLayers.Layer.WMS(
-                "General",
+        var wms_3 = new OpenLayers.Layer.WMS( "Laderas",
                 "http://localhost:8080/geoserver/wms",
-                {   layers: 'microzonas:Microzonas_Amenaza_General',
-                    transparent: "true",
-                    format: "image/png"  }
-        );
-        capa2 = new OpenLayers.Layer.WMS(
-                "Laderas",
+                {layers: 'microzonas:Microzonas_Laderas', format: "image/png"},
+                {isBaseLayer: false});
+
+
+        var wms_2 = new OpenLayers.Layer.WMS( "Sedimentos",
                 "http://localhost:8080/geoserver/wms",
-                {   layers: 'microzonas:Microzonas_Laderas',
-                    transparent: "true",
-                    format: "image/png"  }
-        );
-        capa3 = new OpenLayers.Layer.WMS(
-                "Sedimentos",
+                {layers: 'microzonas:Microzonas_Sedimentos',  format: "image/png"},
+                {isBaseLayer: false});
+
+        var wms_1 = new OpenLayers.Layer.WMS( "Amenaza General",
                 "http://localhost:8080/geoserver/wms",
-                {
-                    layers: 'microzonas:Microzonas_Sedimentos'
-                }
+                {layers: 'microzonas:Microzonas_Amenaza_General',  format: "image/png"}
         );
 
-        map.addLayers([capa1,capa2]);
-        map.zoomToMaxExtent()
+        map.addLayers([wms_1, wms_2, wms_3]);
+        //map.addLayer(wms_1);
+        map.addControl(new OpenLayers.Control.LayerSwitcher());
+        map.zoomToMaxExtent();
     });
 </script>
 {% endblock %}
