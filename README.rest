@@ -9,6 +9,7 @@ Instalación
 ===========
 
 ::
+
     $ git clone https://github.com/funvisis/espectros-microzonas.git
     $ cd espectros-microzonas
     $ virtualenv --distribute entorno

@@ -13,3 +13,9 @@ env/
 .sass-cache
 generated/
 server_logs/
+
+# custom virtualenv dir
+entorno
+
+# Emacs
+*~
