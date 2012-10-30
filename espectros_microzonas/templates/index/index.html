@@ -14,7 +14,23 @@
 <script src="http://openlayers.org/dev/OpenLayers.js"></script>
 <script>
     $(document).ready(function(){
-        var map = new OpenLayers.Map('map');
+        OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
+        format = 'image/png';
+
+        var bounds = new OpenLayers.Bounds(
+                701278.4525937159, 1143737.188069312,
+                752974.5281932829, 1169040.7596747405
+        );
+
+        var options = {
+            controls: [],
+            maxExtent: bounds,
+            maxResolution: 201.93779531080872,
+            projection: "EPSG:2202",
+            units: 'm'
+        };
+
+        var map = new OpenLayers.Map('map', options);
 
         var wms_3 = new OpenLayers.Layer.WMS( "Laderas",
                 "http://localhost:8080/geoserver/wms",
@@ -33,13 +49,21 @@
         );
 
         map.addLayers([wms_1, wms_2, wms_3]);
-        //map.addLayer(wms_1);
+
         map.addControl(new OpenLayers.Control.LayerSwitcher());
-        map.zoomToMaxExtent();
+        map.addControl(new OpenLayers.Control.Navigation());
+        map.addControl(new OpenLayers.Control.Scale($('scale')));
+        map.addControl(new OpenLayers.Control.MousePosition({element: $('location')}));
+        map.zoomToExtent(bounds);
     });
 </script>
 {% endblock %}
 
 {% block content %}
 <div id="map"></div>
+<div id="wrapper">
+    <div id="location"></div>
+    <div id="scale">
+    </div>
+</div>
 {% endblock %}
