@@ -1,4 +1,50 @@
-espectros-microzonas
-====================
+======================
+ espectros-microzonas
+======================
 
-Aplicación web que permite obtener valores de aceleración dados una microzona y un valor de período estructural (principalmente)
+Aplicación web que permite obtener valores de aceleración dados una
+microzona y un valor de período estructural (principalmente)
+
+Instalación
+===========
+
+::
+    $ git clone https://github.com/funvisis/espectros-microzonas.git
+    $ cd espectros-microzonas
+    $ virtualenv --distribute entorno
+    $ source entorno/bin/activate
+    $ pip install -r requirements.pip
+
+El hecho de colocar el entorno virtual en la misma carpeta del
+proyecto es una preferencia personal, así como su nombre, así que no
+es una obligación. Si es conveniente colocar esta carpeta dentro de la
+lista del ``.gitignore``.
+
+Prueba
+======
+
+Luego de instalar el proyecto, hay que tener siempre en cuenta que
+debe usarse con el entorno virtual que se creó para el proyecto. Así
+que para correr el proyecto, primero se debe activar el entorno::
+
+    $ cd <espectros-microzonas> # Supongamos la ruta completa
+    $ source entorno/bin/activate
+    
+La configuración del proyecto debe hacerse en la carpeta
+``<espectros-microzonas>/python/espectros-microzonas/conf/local/settings.py``.
+Ahí simplemente asignan las opciones de configuración que sean nuevas
+o diferentes a las que están en el archivo
+``<espectros-microzonas>/python/espectros-microzonas/settings.py``.
+
+A continuación, se inicializa la base de datos::
+
+    $ cd python
+    $ ./manage.py syncdb
+
+Y por útlimo se puede poner en ejecución el servidor de pruebas para
+revisar el proyecto::
+
+    $ ./manage.py runserver
+
+Con esto, visitando la página ``http://localhost:8000`` se puede
+apreciar el proyecto desde el punto de vista del usuario.
