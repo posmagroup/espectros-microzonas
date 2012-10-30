@@ -1,0 +1,36 @@
+<html>
+<head>
+  <title>OpenLayers Example</title>
+    <script src="http://openlayers.org/api/OpenLayers.js"></script>
+    </head>
+    <body>
+      <div style="width:100%; height:100%" id="map"></div>
+      <script defer="defer" type="text/javascript">
+        var map = new OpenLayers.Map('map');
+        var wms = new OpenLayers.Layer.WMS( "OpenLayers WMS",
+            "http://vmap0.tiles.osgeo.org/wms/vmap0",
+	    {layers: 'basic'},
+	    {isBaseLayer: true});
+        var wms_1 = new OpenLayers.Layer.WMS( "Laderas",
+	    "http://localhost:8080/geoserver/Micronozas/wms",
+	    {layers: 'Micronozas:Microzonas_Laderas', transparent: "true", format: "image/png"},
+	    {isBaseLayer: false});
+
+
+        var wms_2 = new OpenLayers.Layer.WMS( "Sedimentos",
+	    "http://localhost:8080/geoserver/Micronozas/wms",
+	    {layers: 'Micronozas:Microzonas_Sedimentos', transparent: "true", format: "image/png"},
+	    {isBaseLayer: false});
+
+        var wms_3 = new OpenLayers.Layer.WMS( "Amenaza General",
+	    "http://localhost:8080/geoserver/Micronozas/wms",
+	    {layers: 'Micronozas:Microzonas_Amenaza_General', transparent: "true", format: "image/png"},
+	    {isBaseLayer: false});
+
+        map.addLayers([wms,  wms_1, wms_2, wms_3]);
+	map.addControl(new OpenLayers.Control.LayerSwitcher());
+        map.zoomToMaxExtent();
+      </script>
+
+</body>
+</html>
