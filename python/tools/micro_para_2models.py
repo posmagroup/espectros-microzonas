@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# -*- coding: utf-8 -*-
-
 '''
 Syntax:
 python -m micro_para_2models
@@ -33,8 +31,10 @@ def create_microzone(csv_header, mapping, Microzone_class, args):
     correspond each element in the list ``args``. Then ask the mapping
     to know what model field it corresponds.
     '''
-    pass
 
+    microzone_desc = dict(zip([mapping[_] for _ in csv_header], args))
+    microzone = Microzone_class(**microzone_desc)
+    microzone.save()
 
 # The csv could have the cols in any order. So we use the file header
 # to identify the column rol, and then the csv_micro_map to know what
