@@ -1,0 +1,852 @@
+[
+    {
+        "pk": 4, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "contenttype", 
+            "name": "content type", 
+            "app_label": "contenttypes"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "group", 
+            "name": "group", 
+            "app_label": "auth"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "logentry", 
+            "name": "log entry", 
+            "app_label": "admin"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "microzone", 
+            "name": "microzone", 
+            "app_label": "microzonificacion"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "permission", 
+            "name": "permission", 
+            "app_label": "auth"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "session", 
+            "name": "session", 
+            "app_label": "sessions"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "site", 
+            "name": "site", 
+            "app_label": "sites"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "user", 
+            "name": "user", 
+            "app_label": "auth"
+        }
+    }, 
+    {
+        "pk": "623043010291c1c9397f2c21330e76bd", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2012-11-13T21:45:28.128", 
+            "session_data": "NTZmODE2NTYyMDVkNTI3YzdmNWNhNzViNzNjMzBlZjU4ZjVjZGE1ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "sites.site", 
+        "fields": {
+            "domain": "example.com", 
+            "name": "example.com"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.3, 
+            "arg_t0": 0.1, 
+            "phi": 1.0, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.3, 
+            "label": "R1-T0", 
+            "arg_ta": 0.02, 
+            "beta": 2.3, 
+            "arg_td": 2.8, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.38, 
+            "arg_t0": 0.1, 
+            "phi": 1.0, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.265, 
+            "label": "R2-T0", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 2.8, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.38, 
+            "arg_t0": 0.1, 
+            "phi": 1.0, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.28, 
+            "label": "R3-T0", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 2.8, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.4, 
+            "arg_t0": 0.11, 
+            "phi": 1.0, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.3, 
+            "label": "R7-T0", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 3.0, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.28, 
+            "arg_t0": 0.1, 
+            "phi": 1.2, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.3, 
+            "label": "R1-T1", 
+            "arg_ta": 0.02, 
+            "beta": 2.3, 
+            "arg_td": 2.5, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.35, 
+            "arg_t0": 0.1, 
+            "phi": 1.2, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.265, 
+            "label": "R2-T1", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 2.6, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.35, 
+            "arg_t0": 0.1, 
+            "phi": 1.2, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.28, 
+            "label": "R3-T1", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 2.6, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.38, 
+            "arg_t0": 0.11, 
+            "phi": 1.2, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.3, 
+            "label": "R7-T1", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 2.8, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.26, 
+            "arg_t0": 0.1, 
+            "phi": 1.4, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.3, 
+            "label": "R1-T2", 
+            "arg_ta": 0.02, 
+            "beta": 2.3, 
+            "arg_td": 2.3, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.32, 
+            "arg_t0": 0.1, 
+            "phi": 1.4, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.265, 
+            "label": "R2-T2", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 2.5, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.32, 
+            "arg_t0": 0.1, 
+            "phi": 1.4, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.28, 
+            "label": "R3-T2", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 2.5, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.35, 
+            "arg_t0": 0.11, 
+            "phi": 1.4, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.3, 
+            "label": "R7-T2", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 2.6, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.55, 
+            "arg_t0": 0.12, 
+            "phi": 1.55, 
+            "arg_m": 0.07, 
+            "arg_a0": 0.3, 
+            "label": "1-1", 
+            "arg_ta": 0.02, 
+            "beta": 2.1, 
+            "arg_td": 2.0, 
+            "arg_p": 1.4
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.65, 
+            "arg_t0": 0.18, 
+            "phi": 1.4, 
+            "arg_m": 0.12, 
+            "arg_a0": 0.3, 
+            "label": "1-2", 
+            "arg_ta": 0.02, 
+            "beta": 2.3, 
+            "arg_td": 1.9, 
+            "arg_p": 1.35
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.7, 
+            "arg_t0": 0.25, 
+            "phi": 1.0, 
+            "arg_m": 0.2, 
+            "arg_a0": 0.3, 
+            "label": "1-3", 
+            "arg_ta": 0.03, 
+            "beta": 2.8, 
+            "arg_td": 1.8, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.55, 
+            "arg_t0": 0.15, 
+            "phi": 1.55, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.265, 
+            "label": "2-1", 
+            "arg_ta": 0.02, 
+            "beta": 2.3, 
+            "arg_td": 2.0, 
+            "arg_p": 1.35
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.65, 
+            "arg_t0": 0.2, 
+            "phi": 1.4, 
+            "arg_m": 0.05, 
+            "arg_a0": 0.265, 
+            "label": "2-2", 
+            "arg_ta": 0.02, 
+            "beta": 2.6, 
+            "arg_td": 1.85, 
+            "arg_p": 1.25
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.75, 
+            "arg_t0": 0.3, 
+            "phi": 1.0, 
+            "arg_m": 0.12, 
+            "arg_a0": 0.265, 
+            "label": "2-3", 
+            "arg_ta": 0.03, 
+            "beta": 3.0, 
+            "arg_td": 1.8, 
+            "arg_p": 0.85
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.55, 
+            "arg_t0": 0.1, 
+            "phi": 1.5, 
+            "arg_m": -0.05, 
+            "arg_a0": 0.28, 
+            "label": "3-1", 
+            "arg_ta": 0.03, 
+            "beta": 2.1, 
+            "arg_td": 2.6, 
+            "arg_p": 1.4
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.7, 
+            "arg_t0": 0.18, 
+            "phi": 1.4, 
+            "arg_m": 0.08, 
+            "arg_a0": 0.28, 
+            "label": "3-2", 
+            "arg_ta": 0.03, 
+            "beta": 2.45, 
+            "arg_td": 2.0, 
+            "arg_p": 1.3
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.75, 
+            "arg_t0": 0.3, 
+            "phi": 1.1, 
+            "arg_m": 0.12, 
+            "arg_a0": 0.28, 
+            "label": "3-3", 
+            "arg_ta": 0.04, 
+            "beta": 2.8, 
+            "arg_td": 2.0, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.55, 
+            "arg_t0": 0.09, 
+            "phi": 1.2, 
+            "arg_m": -0.12, 
+            "arg_a0": 0.28, 
+            "label": "4-1", 
+            "arg_ta": 0.03, 
+            "beta": 2.1, 
+            "arg_td": 2.0, 
+            "arg_p": 1.1
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.7, 
+            "arg_t0": 0.18, 
+            "phi": 1.2, 
+            "arg_m": -0.05, 
+            "arg_a0": 0.28, 
+            "label": "4-2", 
+            "arg_ta": 0.03, 
+            "beta": 2.35, 
+            "arg_td": 1.9, 
+            "arg_p": 1.1
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.55, 
+            "arg_t0": 0.15, 
+            "phi": 1.05, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.28, 
+            "label": "4-3", 
+            "arg_ta": 0.02, 
+            "beta": 2.3, 
+            "arg_td": 2.0, 
+            "arg_p": 0.75
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.6, 
+            "arg_t0": 0.09, 
+            "phi": 1.2, 
+            "arg_m": -0.1, 
+            "arg_a0": 0.28, 
+            "label": "5-1", 
+            "arg_ta": 0.03, 
+            "beta": 2.1, 
+            "arg_td": 1.5, 
+            "arg_p": 0.65
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.7, 
+            "arg_t0": 0.1, 
+            "phi": 1.15, 
+            "arg_m": -0.2, 
+            "arg_a0": 0.28, 
+            "label": "5-2", 
+            "arg_ta": 0.03, 
+            "beta": 1.8, 
+            "arg_td": 1.5, 
+            "arg_p": 0.55
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 1.0, 
+            "arg_t0": 0.3, 
+            "phi": 0.95, 
+            "arg_m": -0.15, 
+            "arg_a0": 0.28, 
+            "label": "5-3", 
+            "arg_ta": 0.04, 
+            "beta": 2.3, 
+            "arg_td": 1.8, 
+            "arg_p": 0.75
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.7, 
+            "arg_t0": 0.1, 
+            "phi": 1.1, 
+            "arg_m": -0.12, 
+            "arg_a0": 0.28, 
+            "label": "6-1", 
+            "arg_ta": 0.03, 
+            "beta": 2.2, 
+            "arg_td": 1.8, 
+            "arg_p": 0.8
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.75, 
+            "arg_t0": 0.1, 
+            "phi": 1.1, 
+            "arg_m": -0.25, 
+            "arg_a0": 0.28, 
+            "label": "6-2", 
+            "arg_ta": 0.03, 
+            "beta": 1.8, 
+            "arg_td": 1.8, 
+            "arg_p": 0.75
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 1.0, 
+            "arg_t0": 0.4, 
+            "phi": 0.9, 
+            "arg_m": -0.2, 
+            "arg_a0": 0.28, 
+            "label": "6-3", 
+            "arg_ta": 0.03, 
+            "beta": 2.5, 
+            "arg_td": 2.0, 
+            "arg_p": 0.65
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.55, 
+            "arg_t0": 0.15, 
+            "phi": 1.55, 
+            "arg_m": -0.05, 
+            "arg_a0": 0.3, 
+            "label": "7-1", 
+            "arg_ta": 0.02, 
+            "beta": 2.2, 
+            "arg_td": 2.5, 
+            "arg_p": 1.4
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.55, 
+            "arg_t0": 0.15, 
+            "phi": 1.55, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.3, 
+            "label": "7-2", 
+            "arg_ta": 0.02, 
+            "beta": 2.3, 
+            "arg_td": 2.0, 
+            "arg_p": 1.3
+        }
+    }, 
+    {
+        "pk": 33, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.8, 
+            "arg_t0": 0.3, 
+            "phi": 1.0, 
+            "arg_m": 0.2, 
+            "arg_a0": 0.3, 
+            "label": "7-3", 
+            "arg_ta": 0.03, 
+            "beta": 3.0, 
+            "arg_td": 2.0, 
+            "arg_p": 0.85
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_logentry", 
+            "name": "Can add log entry", 
+            "content_type": 7
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_logentry", 
+            "name": "Can change log entry", 
+            "content_type": 7
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_logentry", 
+            "name": "Can delete log entry", 
+            "content_type": 7
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_group", 
+            "name": "Can add group", 
+            "content_type": 2
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_group", 
+            "name": "Can change group", 
+            "content_type": 2
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_group", 
+            "name": "Can delete group", 
+            "content_type": 2
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_permission", 
+            "name": "Can add permission", 
+            "content_type": 1
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_permission", 
+            "name": "Can change permission", 
+            "content_type": 1
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_permission", 
+            "name": "Can delete permission", 
+            "content_type": 1
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_user", 
+            "name": "Can add user", 
+            "content_type": 3
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_user", 
+            "name": "Can change user", 
+            "content_type": 3
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_user", 
+            "name": "Can delete user", 
+            "content_type": 3
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_contenttype", 
+            "name": "Can add content type", 
+            "content_type": 4
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_contenttype", 
+            "name": "Can change content type", 
+            "content_type": 4
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_contenttype", 
+            "name": "Can delete content type", 
+            "content_type": 4
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_microzone", 
+            "name": "Can add microzone", 
+            "content_type": 8
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_microzone", 
+            "name": "Can change microzone", 
+            "content_type": 8
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_microzone", 
+            "name": "Can delete microzone", 
+            "content_type": 8
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_session", 
+            "name": "Can add session", 
+            "content_type": 5
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_session", 
+            "name": "Can change session", 
+            "content_type": 5
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_session", 
+            "name": "Can delete session", 
+            "content_type": 5
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_site", 
+            "name": "Can add site", 
+            "content_type": 6
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_site", 
+            "name": "Can change site", 
+            "content_type": 6
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_site", 
+            "name": "Can delete site", 
+            "content_type": 6
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "admin", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": true, 
+            "is_staff": true, 
+            "last_login": "2012-10-30T21:45:27.971", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$eV6THFxxNfv1$oy5U2uUqLkZX3sGj6GIBQW0503BmNcVi6cqqM8jYHok=", 
+            "email": "admin@f.com", 
+            "date_joined": "2012-10-30T18:38:48.417"
+        }
+    }
+]
