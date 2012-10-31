@@ -24,4 +24,13 @@ class Microzone(models.Model):
         arg_p: "p"
         
     """
-    
+    label = models.CharField(max_length=10)
+    arg_a0 = models.FloatField()
+    phi = models.FloatField()
+    beta = models.FloatField()
+    arg_ta = models.FloatField()
+    arg_t0 = models.FloatField()
+    arg_tstar = models.FloatField()
+    arg_td = models.FloatField()
+    arg_m = models.FloatField()
+    arg_p = models.FloatField()

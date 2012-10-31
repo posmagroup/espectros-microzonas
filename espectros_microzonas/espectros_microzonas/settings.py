@@ -40,7 +40,7 @@ if not os.path.exists(VAR_ROOT):
 # Time and Language Settings.
 #============================================================
 
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/Caracas'
 LANGUAGE_CODE = 'es-ve'
 SITE_ID = 1
 USE_I18N = True
