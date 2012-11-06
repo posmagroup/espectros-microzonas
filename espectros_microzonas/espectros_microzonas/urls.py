@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 
-from apps.index.views import IndexView
+from apps.index.views import IndexView, SampleView
 from apps.microzonificacion.views import MicrozoneDetail
 
 # Uncomment the next two lines to enable the admin:
@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
 
     url(r'^$', IndexView.as_view() ),
+    url(r'^geosample$', SampleView.as_view() ),
     url(r'^json$', MicrozoneDetail.as_view()),
     
 )

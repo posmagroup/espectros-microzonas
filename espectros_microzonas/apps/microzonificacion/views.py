@@ -13,7 +13,7 @@ class TestObject():
 class MicrozoneDetail(JSONResponseMixin, DetailView):
     """
     Returns a JSON object containing the information from certain microzone.
-    
+
     """
 
     #model = MicrozoneModel
