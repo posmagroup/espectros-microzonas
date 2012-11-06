@@ -1,7 +1,9 @@
 # Django settings for webapp project.
 # Import global settings to make it easier to extend settings.
-from django.conf.global_settings import *
+import os
+import sys
 
+from django.conf.global_settings import *
 
 #============================================================
 # Generic Django Settings
@@ -26,11 +28,9 @@ SECRET_KEY = 'p-&amp;wag@jn_u)yr%s))q7d5-x@@-13!yr*ds;kf49d;sf;sd{asdc::9]]494j'
 # Calculation of directories relative to the module location
 #============================================================
 
-import os, sys
 
-PROJECT_DIR, SITE_ROOT = os.path.split(
-                            os.path.dirname(os.path.realpath(__file__))
-                        )
+PROJECT_DIR, SITE_ROOT = os.path.split ( os.path.dirname(os.path.realpath(__file__)) )
+
 
 VAR_ROOT = os.path.join(os.path.split(PROJECT_DIR)[0], 'var')
 if not os.path.exists(VAR_ROOT):
@@ -102,10 +102,8 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-
-
 #=====================================================================
-# Database. Default settings ONLY. All development settings must be 
+# Database. Default settings ONLY. All development settings must be
 # defined in conf.local.settings
 #=====================================================================
 
@@ -179,8 +177,6 @@ LOGGING = {
 # Local Settings
 #============================================================
 
-
-import sys
 
 try:
     from espectros_microzonas.conf.local.settings import *
