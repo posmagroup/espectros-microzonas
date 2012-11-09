@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 
 from apps.index.views import IndexView
-from apps.microzonificacion.views import MicrozoneDetail
+from apps.microzonificacion.views import MicrozoneDetail, ProxyHost
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -20,5 +20,6 @@ urlpatterns = patterns('',
 
     url(r'^$', IndexView.as_view() ),
     url(r'^json$', MicrozoneDetail.as_view()),
-    
+
+    url(r'^proxyhost/', ProxyHost.as_view(), name='proxyhost')
 )
