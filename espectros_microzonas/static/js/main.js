@@ -13,8 +13,8 @@ geoserver_url = "http://190.200.214.201:8080/geoserver/microzonas/wms"
 
 window.mapping = {
     handler: function (request) {
-    // do something with the response
-    alert(request.responseText);
+        // do something with the response
+        alert(request.responseText);
      },
 
     init: function() {
@@ -87,8 +87,8 @@ window.mapping = {
                 QUERY_LAYERS: map.layers[0].params.LAYERS,
                 FEATURE_COUNT: 50,
                 Layers: 'microzonas:Microzonas_Amenaza_General',
-                X: Math.round(event.xy.x), 
-                Y: Math.round(event.xy.y), 
+                X: Math.round(e.xy.x), 
+                Y: Math.round(e.xy.y), 
                 WIDTH: map.size.w,
                 HEIGHT: map.size.h,
                 format: format,
