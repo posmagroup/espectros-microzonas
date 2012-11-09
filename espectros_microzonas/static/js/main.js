@@ -7,8 +7,18 @@
 // 
 
 // window.mapping namespace for the map-related functions.
+//
+
+geoserver_url = "http://190.200.214.201:8080/geoserver/microzonas/wms"
+
 window.mapping = {
+    handler: function (request) {
+    // do something with the response
+    alert(request.responseText);
+     },
+
     init: function() {
+        //OpenLayers.ProxyHost="/proxyhost?url=";
         OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
         format = 'image/png';
 
@@ -28,7 +38,7 @@ window.mapping = {
         var map = new OpenLayers.Map('map', options);
 
         var wms_3 = new OpenLayers.Layer.WMS( "Laderas",
-                "http://localhost:8080/geoserver/wms",
+                geoserver_url,
                 {
                     layers: 'microzonas:Microzonas_Laderas',
                     format: "image/png",
@@ -39,7 +49,7 @@ window.mapping = {
 
 
         var wms_2 = new OpenLayers.Layer.WMS( "Sedimentos",
-                "http://localhost:8080/geoserver/wms",
+                geoserver_url,
                 {
                     layers: 'microzonas:Microzonas_Sedimentos',
                     format: "image/png",
@@ -50,7 +60,7 @@ window.mapping = {
                 {isBaseLayer: false});
 
         var wms_1 = new OpenLayers.Layer.WMS( "Amenaza General",
-                "http://localhost:8080/geoserver/wms",
+                geoserver_url,
                 {
                     layers: 'microzonas:Microzonas_Amenaza_General',
                     format: "image/png",
@@ -77,6 +87,8 @@ window.mapping = {
                 QUERY_LAYERS: map.layers[0].params.LAYERS,
                 FEATURE_COUNT: 50,
                 Layers: 'microzonas:Microzonas_Amenaza_General',
+                X: Math.round(event.xy.x), 
+                Y: Math.round(event.xy.y), 
                 WIDTH: map.size.w,
                 HEIGHT: map.size.h,
                 format: format,
@@ -105,7 +117,15 @@ window.mapping = {
             if(map.layers[0].params.FEATUREID) {
                 params.featureid = map.layers[0].params.FEATUREID;
             }
-            OpenLayers.loadURL("http://127.0.0.1:8080/geoserver/microzonas/wms", params, this, showAttributes, showAttributesError);
+            //OpenLayers.loadURL("http://127.0.0.1:8080/geoserver/microzonas/wms", params, this, showAttributes, showAttributesError);
+            //OpenLayers.loadURL("http://127.0.0.1:8000/proxyhost/", params, this, showAttributes, showAttributesError);
+            
+            OpenLayers.Request.GET({
+                url: "http://localhost:8000/proxyhost/",
+                params:params,
+                //callback:showAttributes
+                callback: window.mapping.handler
+            });
             OpenLayers.Event.stop(e);
         });
     }
