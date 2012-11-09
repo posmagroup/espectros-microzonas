@@ -14,80 +14,20 @@
 <script src="http://openlayers.org/dev/OpenLayers.js"></script>
 <script>
     $(document).ready(function(){
-        OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
-        format = 'image/png';
-
-        var bounds = new OpenLayers.Bounds(
-                701278.4525937159, 1143737.188069312,
-                752974.5281932829, 1169040.7596747405
-        );
-
-        var options = {
-            controls: [],
-            maxExtent: bounds,
-            maxResolution: 201.93779531080872,
-            projection: "EPSG:2202",
-            units: 'm'
+        window.mapping.init();
+        showAttributes = function(response){
+            //alert("hola " + response);
+            for (var key in response){
+                alert(key + ":" + response[key]);
+            }
         };
 
-        var map = new OpenLayers.Map('map', options);
-
-        var wms_3 = new OpenLayers.Layer.WMS( "Laderas",
-                "http://localhost:8080/geoserver/wms",
-                {
-                    layers: 'microzonas:Microzonas_Laderas',
-                    format: "image/png",
-                    transparent: "true"
-                    //0x85C247,
-                },
-                {isBaseLayer: false});
+        showAttributesError = function(response){
+            alert("error " + response.responseText);
+        };
 
 
-        var wms_2 = new OpenLayers.Layer.WMS( "Sedimentos",
-                "http://localhost:8080/geoserver/wms",
-                {
-                    layers: 'microzonas:Microzonas_Sedimentos',
-                    format: "image/png",
-                    style: "",
-                    transparent: "true"
-                    // 0x886744
-                },
-                {isBaseLayer: false});
 
-        var wms_1 = new OpenLayers.Layer.WMS( "Amenaza General",
-                "http://localhost:8080/geoserver/wms",
-                {
-                    layers: 'microzonas:Microzonas_Amenaza_General',
-                    format: "image/png",
-                    transparent: "true"
-                },
-                {isBaseLayer: true}
-        );
-
-        map.addLayers([wms_1, wms_2, wms_3]);
-
-        map.addControl(new OpenLayers.Control.LayerSwitcher());
-        map.addControl(new OpenLayers.Control.Navigation());
-        map.zoomToExtent(bounds);
-
-        zoneIdPicker = new OpenLayers.Control.WMSGetFeatureInfo({
-            url: 'http://localhost:8080/geoserver/microzonas/wms',
-            title: 'identify features on click',
-            layers: ['microzonas:Microzonas_Amenaza_General'],
-            queryVisible: true
-        });
-
-        zoneIdPicker.infoFormat = 'application/vnd.ogc.gml';
-        zoneIdPicker.events.register("getfeatureinfo", this, alertZone);
-        map.addControl(zoneIdPicker);
-        zoneIdPicker.activate();
-
-        function alertZone(e) {
-            if (e.features && e.features.length) {
-                var val = e.features[0].attributes.id;
-                alert(val);
-            }
-        }
     });
 </script>
 {% endblock %}
