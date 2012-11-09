@@ -8,7 +8,7 @@ from braces.views import JSONResponseMixin
 
 import requests
 
-geoserver_url = getattr(settings, 'GEOSERVER_URL', 'http://190.200.214.201:8080/geoserver/microzonas/wms')
+geoserver_url = getattr(settings, 'GEOSERVER_URL', 'http://localhost:8080/geoserver/microzonas/wms')
 
 
 class ProxyHost(View):
