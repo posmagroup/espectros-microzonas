@@ -1,4 +1,5 @@
 # Create your views here.
+import urllib
 from django.conf import settings
 from django.http import HttpResponse
 from django.views.generic import DetailView, View
@@ -8,7 +9,7 @@ from braces.views import JSONResponseMixin
 
 import requests
 
-geoserver_url = getattr(settings, 'GEOSERVER_URL', 'http://localhost:8080/geoserver/microzonas/wms')
+geoserver_url = getattr(settings, 'GEOSERVER_URL', 'http://localhost:8080/geoserver/microzonas/wms?')
 
 
 class ProxyHost(View):
@@ -27,14 +28,15 @@ class ProxyHost(View):
         The GEOSERVER_URL setting must be declared in settings. Defaults to localhost.
 
         """
-
         try:
-            response = requests.post(geoserver_url, request.GET)
-            print request.GET
-            print response.__dict__
+            print "holis"
+            print "Request = %s" % request.GET
+            response = requests.get(geoserver_url + urllib.urlencode(request.GET))
+            #print request.GET
+            print "response = %s" % response.__dict__
             return HttpResponse(response._content)
-        except:
-            pass
+        except Exception, e:
+            print "exception! --> %s" % e
 
 
 class MicrozoneDetail(JSONResponseMixin, DetailView):

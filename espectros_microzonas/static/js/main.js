@@ -9,15 +9,15 @@
 // window.mapping namespace for the map-related functions.
 //
 
-geoserver_url = "http://190.200.214.201:8080/geoserver/microzonas/wms"
+geoserver_url = "http://190.73.10.65:8080/geoserver/microzonas/wms"
 
 window.mapping = {
     handler: function (request) {
         // do something with the response
-        alert(request);
-        for (var key in request){
+        alert(request.responseText);
+        /*for (var key in request){
             alert(key + ":" + request[key]);
-        }
+        }*/
      },
 
     init: function() {
@@ -74,8 +74,8 @@ window.mapping = {
 
         map.addLayers([wms_1, wms_2, wms_3]);
 
-        map.addControl(new OpenLayers.Control.LayerSwitcher());
-        map.addControl(new OpenLayers.Control.Navigation());
+        /*map.addControl(new OpenLayers.Control.LayerSwitcher());
+        map.addControl(new OpenLayers.Control.Navigation());*/
         map.zoomToExtent(bounds);
 
         // support GetFeatureInfo
@@ -98,18 +98,6 @@ window.mapping = {
                 styles: map.layers[0].params.STYLES,
                 srs: map.layers[0].params.SRS};
 
-            // handle the wms 1.3 vs wms 1.1 madness
-            /*
-            if(map.layers[0].params.VERSION == "1.3.0") {
-                params.version = "1.3.0";
-                params.j = parseInt(e.xy.x);
-                params.i = parseInt(e.xy.y);
-            } else {
-                params.version = "1.1.1";
-                params.x = parseInt(e.xy.x);
-                params.y = parseInt(e.xy.y);
-            }*/
-
             // merge filters
             if(map.layers[0].params.CQL_FILTER != null) {
                 params.cql_filter = map.layers[0].params.CQL_FILTER;
@@ -121,14 +109,14 @@ window.mapping = {
                 params.featureid = map.layers[0].params.FEATUREID;
             }
             //OpenLayers.loadURL("http://127.0.0.1:8080/geoserver/microzonas/wms", params, this, showAttributes, showAttributesError);
-            //OpenLayers.loadURL("http://127.0.0.1:8000/proxyhost/", params, this, showAttributes, showAttributesError);
+            OpenLayers.loadURL("http://127.0.0.1:8000/proxyhost/", params, this, window.mapping.handler, window.mapping.handler);
             
-            OpenLayers.Request.GET({
+            /*OpenLayers.Request.GET({
                 url: "http://localhost:8000/proxyhost/",
                 params:params,
                 //callback:showAttributes
                 callback: window.mapping.handler
-            });
+            });*/
             OpenLayers.Event.stop(e);
         });
     }

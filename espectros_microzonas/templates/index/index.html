@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block extracss %}
+{% block extrahead %}
 <style>
     #map {
         width: 600px;
@@ -15,8 +15,8 @@
 <script>
     $(document).ready(function(){
         window.mapping.init();
-        showAttributes = function(response){
-            //alert("hola " + response);
+        /*showAttributes = function(response){
+            alert("hola " + response.responseText);
             for (var key in response){
                 alert(key + ":" + response[key]);
             }
@@ -24,10 +24,7 @@
 
         showAttributesError = function(response){
             alert("error " + response.responseText);
-        };
-
-
-
+        };*/
     });
 </script>
 {% endblock %}
