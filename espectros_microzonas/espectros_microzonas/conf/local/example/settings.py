@@ -5,6 +5,8 @@ import os
 
 DEBUG = True
 
+GEOSERVER_URL = "http:192.200.214.201:8080/geoserver/microzonas/wms/"
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', 

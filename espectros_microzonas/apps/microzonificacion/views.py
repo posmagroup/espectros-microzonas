@@ -30,6 +30,8 @@ class ProxyHost(View):
 
         try:
             response = requests.post(geoserver_url, request.GET)
+            print request.GET
+            print response.__dict__
             return HttpResponse(response._content)
         except:
             pass

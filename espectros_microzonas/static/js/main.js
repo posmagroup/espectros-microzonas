@@ -14,7 +14,10 @@ geoserver_url = "http://190.200.214.201:8080/geoserver/microzonas/wms"
 window.mapping = {
     handler: function (request) {
         // do something with the response
-        alert(request.responseText);
+        alert(request);
+        for (var key in request){
+            alert(key + ":" + request[key]);
+        }
      },
 
     init: function() {
