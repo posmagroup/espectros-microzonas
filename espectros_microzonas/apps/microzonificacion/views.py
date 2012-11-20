@@ -2,10 +2,11 @@
 import urllib
 from django.conf import settings
 from django.http import HttpResponse
+from django.template.defaultfilters import slugify
 from django.views.generic import DetailView, View
 
 from braces.views import JSONResponseMixin
-
+from pyquery import PyQuery as pq
 
 import requests
 
@@ -29,12 +30,14 @@ class ProxyHost(View):
 
         """
         try:
-            print "holis"
-            print "Request = %s" % request.GET
+            #print "Request = %s" % request.GET
             response = requests.get(geoserver_url + urllib.urlencode(request.GET))
             #print request.GET
-            print "response = %s" % response.__dict__
-            return HttpResponse(response._content)
+            #print "response = %s" % response.content
+            pqobj = pq(response.content)
+            tb = pqobj('table')
+            attribute = tb('td').next().next().html()
+            return HttpResponse(attribute)
         except Exception, e:
             print "exception! --> %s" % e
 
@@ -48,9 +51,23 @@ class MicrozoneDetail(JSONResponseMixin, DetailView):
     #model = MicrozoneModel
 
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
+        attr = self.get_microzone_id(request)
         context_dict = {
             # get the information from the object
         }
 
         return self.render_json_response(context_dict)
+
+    def get_microzone_id(self, request):
+        """
+        Redirects the get request to GeoServer.
+        The GEOSERVER_URL setting must be declared in settings. Defaults to localhost.
+
+        """
+        response = requests.get(geoserver_url + urllib.urlencode(request.GET))
+        pqobj = pq(response.content)
+        tb = pqobj('table')
+        attribute = tb('td').next().next().html()
+        attr_slug = slugify(attribute)
+        print "attr = %s" % attr_slug
+        return attr_slug

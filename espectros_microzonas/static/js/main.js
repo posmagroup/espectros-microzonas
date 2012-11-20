@@ -9,14 +9,28 @@
 // window.mapping namespace for the map-related functions.
 //
 
-geoserver_url = "http://190.73.10.65:8080/geoserver/microzonas/wms"
+geoserver_url = "http://190.73.13.224:8080/geoserver/microzonas/wms"
 
 window.mapping = {
     handler: function (request) {
         // do something with the response
+        alert("holis");
+        //alert(request);
+        /*for (var i = 0; i < request.length; i++) {
+            var feature = request[i];
+            var attributes = request.attributes;
+            alert(OpenLayers.i18n(feature.type));
+            for (var k in attributes) {
+               // html += '<tr><th>' + k.replace(/_/gi, ' ') + '</th><td>' + attributes[k] + '</td></tr>';
+                alert(attributes[k]);
+            }
+        }*/
         alert(request.responseText);
-        /*for (var key in request){
-            alert(key + ":" + request[key]);
+        $("#attribute_table").html(request.responseText);
+        var obj = $("#attribute_table").get(0);
+        alert(obj);
+        /*for (var key in obj){
+            alert(key + ":" + obj[key]);
         }*/
      },
 
@@ -83,7 +97,7 @@ window.mapping = {
 
             var params = {
                 REQUEST: "GetFeatureInfo",
-                EXCEPTIONS: "application/vnd.ogc.se_xml",
+                EXCEPTIONS: "application/vnd.ogc.gml",
                 BBOX: map.getExtent().toBBOX(), //????
                 SERVICE: "WMS",
                 INFO_FORMAT: 'text/html',
