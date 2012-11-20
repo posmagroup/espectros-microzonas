@@ -3,6 +3,7 @@ PIL==1.1.7
 South==0.7.3
 anyjson==0.3.1
 argparse==1.2.1
+cssselect==0.7.1
 distribute==0.6.28
 django-braces==0.1.7
 django-crispy-forms==1.2.0
@@ -12,7 +13,11 @@ django-javascript-settings==1.0.1
 django-secure==0.1.0
 ipdb==0.6
 ipython==0.11
+lxml==2.3.6
+pyquery==1.2.2
+pyreadline==2.0-dev1
 python-dateutil==1.5
+requests==0.14.2
 sorl-thumbnail==11.09
 textile==2.1.5
 wsgiref==0.1.2

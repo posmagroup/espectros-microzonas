@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block extracss %}
+{% block extrahead %}
 <style>
     #map {
         width: 600px;
@@ -14,29 +14,28 @@
 <script src="http://openlayers.org/dev/OpenLayers.js"></script>
 <script>
     $(document).ready(function(){
-        var map = new OpenLayers.Map('map');
+        window.mapping.init();
+        /*showAttributes = function(response){
+            alert("hola " + response.responseText);
+            for (var key in response){
+                alert(key + ":" + response[key]);
+            }
+        };
 
-        capa1 = new OpenLayers.Layer.WMS(
-                "General",
-                "http://localhost:8080/geoserver/wms",
-                {
-                    layers: 'microzonas:Microzonas_Amenaza_General'
-                }
-        );
-        capa2 = new OpenLayers.Layer.WMS(
-                "Laderas",
-                "http://localhost:8080/geoserver/wms",
-                {
-                    layers: 'microzonas:Microzonas_Laderas'
-                }
-        );
-        map.addLayer(capa1);
-        map.addLayer(capa2);
-        map.zoomToMaxExtent()
+        showAttributesError = function(response){
+            alert("error " + response.responseText);
+        };*/
     });
 </script>
 {% endblock %}
 
 {% block content %}
 <div id="map"></div>
+<div id="wrapper">
+    <div id="location"></div>
+    <div id="scale">
+    </div>
+</div>
+<div id="attribute_table" style="display: none">
+</div>
 {% endblock %}

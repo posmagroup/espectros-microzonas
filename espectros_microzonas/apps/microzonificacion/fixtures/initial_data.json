@@ -1,0 +1,530 @@
+[
+    {
+        "pk": 1, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.3, 
+            "arg_t0": 0.1, 
+            "phi": 1.0, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.3, 
+            "label": "R1-T0", 
+            "arg_ta": 0.02, 
+            "beta": 2.3, 
+            "arg_td": 2.8, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.38, 
+            "arg_t0": 0.1, 
+            "phi": 1.0, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.265, 
+            "label": "R2-T0", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 2.8, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.38, 
+            "arg_t0": 0.1, 
+            "phi": 1.0, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.28, 
+            "label": "R3-T0", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 2.8, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.4, 
+            "arg_t0": 0.11, 
+            "phi": 1.0, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.3, 
+            "label": "R7-T0", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 3.0, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.28, 
+            "arg_t0": 0.1, 
+            "phi": 1.2, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.3, 
+            "label": "R1-T1", 
+            "arg_ta": 0.02, 
+            "beta": 2.3, 
+            "arg_td": 2.5, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.35, 
+            "arg_t0": 0.1, 
+            "phi": 1.2, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.265, 
+            "label": "R2-T1", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 2.6, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.35, 
+            "arg_t0": 0.1, 
+            "phi": 1.2, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.28, 
+            "label": "R3-T1", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 2.6, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.38, 
+            "arg_t0": 0.11, 
+            "phi": 1.2, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.3, 
+            "label": "R7-T1", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 2.8, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.26, 
+            "arg_t0": 0.1, 
+            "phi": 1.4, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.3, 
+            "label": "R1-T2", 
+            "arg_ta": 0.02, 
+            "beta": 2.3, 
+            "arg_td": 2.3, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.32, 
+            "arg_t0": 0.1, 
+            "phi": 1.4, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.265, 
+            "label": "R2-T2", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 2.5, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.32, 
+            "arg_t0": 0.1, 
+            "phi": 1.4, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.28, 
+            "label": "R3-T2", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 2.5, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.35, 
+            "arg_t0": 0.11, 
+            "phi": 1.4, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.3, 
+            "label": "R7-T2", 
+            "arg_ta": 0.02, 
+            "beta": 2.35, 
+            "arg_td": 2.6, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.55, 
+            "arg_t0": 0.12, 
+            "phi": 1.55, 
+            "arg_m": 0.07, 
+            "arg_a0": 0.3, 
+            "label": "1-1", 
+            "arg_ta": 0.02, 
+            "beta": 2.1, 
+            "arg_td": 2.0, 
+            "arg_p": 1.4
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.65, 
+            "arg_t0": 0.18, 
+            "phi": 1.4, 
+            "arg_m": 0.12, 
+            "arg_a0": 0.3, 
+            "label": "1-2", 
+            "arg_ta": 0.02, 
+            "beta": 2.3, 
+            "arg_td": 1.9, 
+            "arg_p": 1.35
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.7, 
+            "arg_t0": 0.25, 
+            "phi": 1.0, 
+            "arg_m": 0.2, 
+            "arg_a0": 0.3, 
+            "label": "1-3", 
+            "arg_ta": 0.03, 
+            "beta": 2.8, 
+            "arg_td": 1.8, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.55, 
+            "arg_t0": 0.15, 
+            "phi": 1.55, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.265, 
+            "label": "2-1", 
+            "arg_ta": 0.02, 
+            "beta": 2.3, 
+            "arg_td": 2.0, 
+            "arg_p": 1.35
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.65, 
+            "arg_t0": 0.2, 
+            "phi": 1.4, 
+            "arg_m": 0.05, 
+            "arg_a0": 0.265, 
+            "label": "2-2", 
+            "arg_ta": 0.02, 
+            "beta": 2.6, 
+            "arg_td": 1.85, 
+            "arg_p": 1.25
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.75, 
+            "arg_t0": 0.3, 
+            "phi": 1.0, 
+            "arg_m": 0.12, 
+            "arg_a0": 0.265, 
+            "label": "2-3", 
+            "arg_ta": 0.03, 
+            "beta": 3.0, 
+            "arg_td": 1.8, 
+            "arg_p": 0.85
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.55, 
+            "arg_t0": 0.1, 
+            "phi": 1.5, 
+            "arg_m": -0.05, 
+            "arg_a0": 0.28, 
+            "label": "3-1", 
+            "arg_ta": 0.03, 
+            "beta": 2.1, 
+            "arg_td": 2.6, 
+            "arg_p": 1.4
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.7, 
+            "arg_t0": 0.18, 
+            "phi": 1.4, 
+            "arg_m": 0.08, 
+            "arg_a0": 0.28, 
+            "label": "3-2", 
+            "arg_ta": 0.03, 
+            "beta": 2.45, 
+            "arg_td": 2.0, 
+            "arg_p": 1.3
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.75, 
+            "arg_t0": 0.3, 
+            "phi": 1.1, 
+            "arg_m": 0.12, 
+            "arg_a0": 0.28, 
+            "label": "3-3", 
+            "arg_ta": 0.04, 
+            "beta": 2.8, 
+            "arg_td": 2.0, 
+            "arg_p": 1.0
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.55, 
+            "arg_t0": 0.09, 
+            "phi": 1.2, 
+            "arg_m": -0.12, 
+            "arg_a0": 0.28, 
+            "label": "4-1", 
+            "arg_ta": 0.03, 
+            "beta": 2.1, 
+            "arg_td": 2.0, 
+            "arg_p": 1.1
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.7, 
+            "arg_t0": 0.18, 
+            "phi": 1.2, 
+            "arg_m": -0.05, 
+            "arg_a0": 0.28, 
+            "label": "4-2", 
+            "arg_ta": 0.03, 
+            "beta": 2.35, 
+            "arg_td": 1.9, 
+            "arg_p": 1.1
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.55, 
+            "arg_t0": 0.15, 
+            "phi": 1.05, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.28, 
+            "label": "4-3", 
+            "arg_ta": 0.02, 
+            "beta": 2.3, 
+            "arg_td": 2.0, 
+            "arg_p": 0.75
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.6, 
+            "arg_t0": 0.09, 
+            "phi": 1.2, 
+            "arg_m": -0.1, 
+            "arg_a0": 0.28, 
+            "label": "5-1", 
+            "arg_ta": 0.03, 
+            "beta": 2.1, 
+            "arg_td": 1.5, 
+            "arg_p": 0.65
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.7, 
+            "arg_t0": 0.1, 
+            "phi": 1.15, 
+            "arg_m": -0.2, 
+            "arg_a0": 0.28, 
+            "label": "5-2", 
+            "arg_ta": 0.03, 
+            "beta": 1.8, 
+            "arg_td": 1.5, 
+            "arg_p": 0.55
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 1.0, 
+            "arg_t0": 0.3, 
+            "phi": 0.95, 
+            "arg_m": -0.15, 
+            "arg_a0": 0.28, 
+            "label": "5-3", 
+            "arg_ta": 0.04, 
+            "beta": 2.3, 
+            "arg_td": 1.8, 
+            "arg_p": 0.75
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.7, 
+            "arg_t0": 0.1, 
+            "phi": 1.1, 
+            "arg_m": -0.12, 
+            "arg_a0": 0.28, 
+            "label": "6-1", 
+            "arg_ta": 0.03, 
+            "beta": 2.2, 
+            "arg_td": 1.8, 
+            "arg_p": 0.8
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.75, 
+            "arg_t0": 0.1, 
+            "phi": 1.1, 
+            "arg_m": -0.25, 
+            "arg_a0": 0.28, 
+            "label": "6-2", 
+            "arg_ta": 0.03, 
+            "beta": 1.8, 
+            "arg_td": 1.8, 
+            "arg_p": 0.75
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 1.0, 
+            "arg_t0": 0.4, 
+            "phi": 0.9, 
+            "arg_m": -0.2, 
+            "arg_a0": 0.28, 
+            "label": "6-3", 
+            "arg_ta": 0.03, 
+            "beta": 2.5, 
+            "arg_td": 2.0, 
+            "arg_p": 0.65
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.55, 
+            "arg_t0": 0.15, 
+            "phi": 1.55, 
+            "arg_m": -0.05, 
+            "arg_a0": 0.3, 
+            "label": "7-1", 
+            "arg_ta": 0.02, 
+            "beta": 2.2, 
+            "arg_td": 2.5, 
+            "arg_p": 1.4
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.55, 
+            "arg_t0": 0.15, 
+            "phi": 1.55, 
+            "arg_m": 0.0, 
+            "arg_a0": 0.3, 
+            "label": "7-2", 
+            "arg_ta": 0.02, 
+            "beta": 2.3, 
+            "arg_td": 2.0, 
+            "arg_p": 1.3
+        }
+    }, 
+    {
+        "pk": 33, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.8, 
+            "arg_t0": 0.3, 
+            "phi": 1.0, 
+            "arg_m": 0.2, 
+            "arg_a0": 0.3, 
+            "label": "7-3", 
+            "arg_ta": 0.03, 
+            "beta": 3.0, 
+            "arg_td": 2.0, 
+            "arg_p": 0.85
+        }
+    }
+]
