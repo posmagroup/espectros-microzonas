@@ -1,4 +1,8 @@
-# Django settings for webapp project.
+# -*- coding: utf-8 -*-
+"""
+    Django settings for the espectros-microzonas project.
+
+"""
 # Import global settings to make it easier to extend settings.
 import os
 import sys
@@ -137,6 +141,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'apps.microzonificacion',
 )
 
 #============================================================
