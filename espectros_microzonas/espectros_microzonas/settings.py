@@ -186,4 +186,10 @@ LOGGING = {
 try:
     from espectros_microzonas.conf.local.settings import *
 except sys.exc_info()[0], e:
-    pass
+    print \
+"""
+NOTICE
+======
+
+No local config loaded
+"""
