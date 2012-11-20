@@ -14,24 +14,10 @@ geoserver_url = "http://190.73.13.224:8080/geoserver/microzonas/wms"
 window.mapping = {
     handler: function (request) {
         // do something with the response
-        alert("holis");
-        //alert(request);
-        /*for (var i = 0; i < request.length; i++) {
-            var feature = request[i];
-            var attributes = request.attributes;
-            alert(OpenLayers.i18n(feature.type));
-            for (var k in attributes) {
-               // html += '<tr><th>' + k.replace(/_/gi, ' ') + '</th><td>' + attributes[k] + '</td></tr>';
-                alert(attributes[k]);
-            }
-        }*/
-        alert(request.responseText);
-        $("#attribute_table").html(request.responseText);
-        var obj = $("#attribute_table").get(0);
-        alert(obj);
-        /*for (var key in obj){
-            alert(key + ":" + obj[key]);
-        }*/
+        alert("holiiiiiiiis");
+        for (var key in request){
+            alert(key + ":" + request[key]);
+        }
      },
 
     init: function() {
@@ -123,7 +109,7 @@ window.mapping = {
                 params.featureid = map.layers[0].params.FEATUREID;
             }
             //OpenLayers.loadURL("http://127.0.0.1:8080/geoserver/microzonas/wms", params, this, showAttributes, showAttributesError);
-            OpenLayers.loadURL("http://127.0.0.1:8000/proxyhost/", params, this, window.mapping.handler, window.mapping.handler);
+            OpenLayers.loadURL("http://127.0.0.1:8000/getmicrozone/", params, this, window.mapping.handler, window.mapping.handler);
             
             /*OpenLayers.Request.GET({
                 url: "http://localhost:8000/proxyhost/",
