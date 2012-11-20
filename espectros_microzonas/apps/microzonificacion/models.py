@@ -3,7 +3,7 @@
 from django.db import models
 
 
-clas Microzone(models.Model):
+class Microzone(models.Model):
     """
     This model represent all the information about a microzone in the database.
 
@@ -24,7 +24,7 @@ clas Microzone(models.Model):
 
     """
     name = models.CharField(max_length=30)
-    slug = models.SlugField()
+    label = models.SlugField()
 
     arg_a0 = models.FloatField()
     phi = models.FloatField()
