@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # Create your views here.
 import urllib
 from django.conf import settings

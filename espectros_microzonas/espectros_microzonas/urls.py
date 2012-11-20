@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.conf.urls import patterns, include, url
 
 from apps.index.views import IndexView, SampleView
@@ -11,7 +13,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'espectros_microzonas.views.home', name='home'),
     # url(r'^espectros_microzonas/', include('espectros_microzonas.foo.urls')),
-    
+
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
