@@ -4,41 +4,16 @@
 import urllib
 from django.conf import settings
 from django.http import HttpResponse
+from django.template.defaultfilters import slugify
 from django.views.generic import DetailView, View
 
 from braces.views import JSONResponseMixin
-
+from pyquery import PyQuery as pq
 
 import requests
+from apps.microzonificacion.models import Microzone
 
 geoserver_url = getattr(settings, 'GEOSERVER_URL', 'http://localhost:8080/geoserver/microzonas/wms?')
-
-
-class ProxyHost(View):
-    """
-    ProxyHost: Implements a proxy to between the OpenLayers and GeoServer, due to
-    HttpRequest limitations.
-
-    Based on the terrible documented code from OpenLayers examples:
-    http://trac.osgeo.org/openlayers/browser/trunk/openlayers/examples/proxy.cgi
-
-    """
-
-    def get(self, request, *args, **kwargs):
-        """
-        Redirects the get request to GeoServer.
-        The GEOSERVER_URL setting must be declared in settings. Defaults to localhost.
-
-        """
-        try:
-            print "holis"
-            print "Request = %s" % request.GET
-            response = requests.get(geoserver_url + urllib.urlencode(request.GET))
-            #print request.GET
-            print "response = %s" % response.__dict__
-            return HttpResponse(response._content)
-        except Exception, e:
-            print "exception! --> %s" % e
 
 
 class MicrozoneDetail(JSONResponseMixin, DetailView):
@@ -49,10 +24,42 @@ class MicrozoneDetail(JSONResponseMixin, DetailView):
 
     #model = MicrozoneModel
 
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        context_dict = {
-            # get the information from the object
-        }
+    def get_object(self, **kwargs):
+        return Microzone.objects.get(label__iexact=kwargs['label'])
 
-        return self.render_json_response(context_dict)
+    def get(self, request, *args, **kwargs):
+        try:
+            attr = self.get_microzone_id(request)
+            obj = self.get_object(label=attr)
+
+            context_dict = {
+                'arg_a0': obj.arg_a0,
+                'phi': obj.phi,
+                'beta': obj.beta,
+                'arg_ta': obj.arg_ta,
+                'arg_t0': obj.arg_t0,
+                'arg_tstar': obj.arg_tstar,
+                'arg_td': obj.arg_td,
+                'arg_m': obj.arg_m,
+                'arg_p': obj.arg_p
+            }
+
+            return self.render_json_response(context_dict)
+        except Exception, e:
+            print e
+            return None
+
+    def get_microzone_id(self, request):
+        """
+        Redirects the get request to GeoServer.
+        The GEOSERVER_URL setting must be declared in settings. Defaults to localhost.
+
+        """
+        response = requests.get(geoserver_url + urllib.urlencode(request.GET))
+
+        pqobj = pq(response.content)
+        tb = pqobj('table')
+        attribute = tb('td').next().next().html()
+        #attr_slug = slugify(attribute)
+        #print "attr = %s" % attr_slug
+        return attribute

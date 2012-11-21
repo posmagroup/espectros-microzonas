@@ -9,7 +9,7 @@
 // window.mapping namespace for the map-related functions.
 //
 
-geoserver_url = "http://190.73.10.65:8080/geoserver/microzonas/wms"
+geoserver_url = "http://190.73.13.224:8080/geoserver/microzonas/wms"
 
 window.mapping = {
     handler: function (request) {
@@ -83,7 +83,7 @@ window.mapping = {
 
             var params = {
                 REQUEST: "GetFeatureInfo",
-                EXCEPTIONS: "application/vnd.ogc.se_xml",
+                EXCEPTIONS: "application/vnd.ogc.gml",
                 BBOX: map.getExtent().toBBOX(), //????
                 SERVICE: "WMS",
                 INFO_FORMAT: 'text/html',
@@ -109,7 +109,7 @@ window.mapping = {
                 params.featureid = map.layers[0].params.FEATUREID;
             }
             //OpenLayers.loadURL("http://127.0.0.1:8080/geoserver/microzonas/wms", params, this, showAttributes, showAttributesError);
-            OpenLayers.loadURL("http://127.0.0.1:8000/proxyhost/", params, this, window.mapping.handler, window.mapping.handler);
+            OpenLayers.loadURL("http://127.0.0.1:8000/getmicrozone/", params, this, window.mapping.handler, window.mapping.handler);
             
             /*OpenLayers.Request.GET({
                 url: "http://localhost:8000/proxyhost/",
