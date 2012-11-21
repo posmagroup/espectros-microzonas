@@ -54,4 +54,4 @@ Pre-requisitos
 ===============
 
 Debe existir una instancia de geoserver corriendo en un servidor. El URL
-de esta instancia debe ser configurado en settings.GEOSERVER_URL
+de esta instancia debe ser configurado en ``settings.GEOSERVER_URL``.
