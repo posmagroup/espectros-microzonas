@@ -49,3 +49,9 @@ revisar el proyecto::
 
 Con esto, visitando la página ``http://localhost:8000`` se puede
 apreciar el proyecto desde el punto de vista del usuario.
+
+Pre-requisitos
+===============
+
+Debe existir una instancia de geoserver corriendo en un servidor. El URL
+de esta instancia debe ser configurado en settings.GEOSERVER_URL
