@@ -13,3 +13,6 @@ env/
 .sass-cache
 generated/
 server_logs/
+
+# Emacs backup files
+*~
