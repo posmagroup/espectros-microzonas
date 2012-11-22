@@ -14,7 +14,8 @@
 <script src="http://openlayers.org/dev/OpenLayers.js"></script>
 <script>
     $(document).ready(function(){
-        window.mapping.init();
+        //window.mapping.init();
+        window.charts.plot_test();
         /*showAttributes = function(response){
             alert("hola " + response.responseText);
             for (var key in response){
@@ -36,6 +37,7 @@
     <div id="scale">
     </div>
 </div>
-<div id="attribute_table" style="display: none">
+<!--<div id="attribute_table" style="display: none">-->
+<div id="chartdiv" style="height:400px;width:300px; "></div>
 </div>
 {% endblock %}
