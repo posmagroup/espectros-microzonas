@@ -3,7 +3,7 @@
 # Create your views here.
 import urllib
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.template.defaultfilters import slugify
 from django.views.generic import DetailView, View
 
@@ -47,7 +47,8 @@ class MicrozoneDetail(JSONResponseMixin, DetailView):
             return self.render_json_response(context_dict)
         except Exception, e:
             print e
-            return None
+            raise Http404
+            #return HttpResponse()
 
     def get_microzone_id(self, request):
         """

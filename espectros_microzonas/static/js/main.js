@@ -9,7 +9,8 @@
 // window.mapping namespace for the map-related functions.
 //
 
-geoserver_url = "http://190.73.13.224:8080/geoserver/microzonas/wms"
+server_ip = "190.73.13.202"
+geoserver_url = "http://"+ server_ip +":8080/geoserver/microzonas/wms"
 
 window.mapping = {
     handler: function (request) {
@@ -74,8 +75,8 @@ window.mapping = {
 
         map.addLayers([wms_1, wms_2, wms_3]);
 
-        /*map.addControl(new OpenLayers.Control.LayerSwitcher());
-        map.addControl(new OpenLayers.Control.Navigation());*/
+        map.addControl(new OpenLayers.Control.LayerSwitcher());
+        map.addControl(new OpenLayers.Control.Navigation());
         map.zoomToExtent(bounds);
 
         // support GetFeatureInfo
@@ -109,7 +110,7 @@ window.mapping = {
                 params.featureid = map.layers[0].params.FEATUREID;
             }
             //OpenLayers.loadURL("http://127.0.0.1:8080/geoserver/microzonas/wms", params, this, showAttributes, showAttributesError);
-            OpenLayers.loadURL("http://127.0.0.1:8000/getmicrozone/", params, this, window.mapping.handler, window.mapping.handler);
+            OpenLayers.loadURL("http://"+ server_ip +":8000/getmicrozone/", params, this, window.mapping.handler, window.mapping.handler);
             
             /*OpenLayers.Request.GET({
                 url: "http://localhost:8000/proxyhost/",
