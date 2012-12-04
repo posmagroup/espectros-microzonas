@@ -9,8 +9,8 @@
 // window.mapping namespace for the map-related functions.
 //
 
-server_ip = "190.73.13.202"
-geoserver_url = "http://"+ server_ip +":8080/geoserver/microzonas/wms"
+server_ip = "190.73.9.70";
+geoserver_url = "http://"+ server_ip +":8080/geoserver/microzonas/wms";
 
 window.mapping = {
     handler: function (request) {
@@ -79,51 +79,10 @@ window.mapping = {
         map.addControl(new OpenLayers.Control.Navigation());
         map.zoomToExtent(bounds);
 
-        // support GetFeatureInfo
-        map.events.register('click', map, function (e) {
-
-            var params = {
-                REQUEST: "GetFeatureInfo",
-                EXCEPTIONS: "application/vnd.ogc.gml",
-                BBOX: map.getExtent().toBBOX(), //????
-                SERVICE: "WMS",
-                INFO_FORMAT: 'text/html',
-                QUERY_LAYERS: map.layers[0].params.LAYERS,
-                FEATURE_COUNT: 50,
-                Layers: 'microzonas:Microzonas_Amenaza_General',
-                X: Math.round(e.xy.x), 
-                Y: Math.round(e.xy.y), 
-                WIDTH: map.size.w,
-                HEIGHT: map.size.h,
-                format: format,
-                styles: map.layers[0].params.STYLES,
-                srs: map.layers[0].params.SRS};
-
-            // merge filters
-            if(map.layers[0].params.CQL_FILTER != null) {
-                params.cql_filter = map.layers[0].params.CQL_FILTER;
-            }
-            if(map.layers[0].params.FILTER != null) {
-                params.filter = map.layers[0].params.FILTER;
-            }
-            if(map.layers[0].params.FEATUREID) {
-                params.featureid = map.layers[0].params.FEATUREID;
-            }
-            //OpenLayers.loadURL("http://127.0.0.1:8080/geoserver/microzonas/wms", params, this, showAttributes, showAttributesError);
-            OpenLayers.loadURL("http://"+ server_ip +":8000/getmicrozone/", params, this, window.mapping.handler, window.mapping.handler);
-            
-            /*OpenLayers.Request.GET({
-                url: "http://localhost:8000/proxyhost/",
-                params:params,
-                //callback:showAttributes
-                callback: window.mapping.handler
-            });*/
-            OpenLayers.Event.stop(e);
-        });
+        micro = new Microzona();
+        micro.registerMap(map, 'microzonas:Microzonas_Amenaza_General', 'http://'+server_ip+':8000/getmicrozone');
     }
-
 }
-
 
 // window.charts namespace for the chart-related functions.
 window.charts = {
@@ -131,6 +90,3 @@ window.charts = {
         $.jqplot('chartdiv',  [[[1, 2],[3,5.12],[5,13.1],[7,33.6],[9,85.9],[11,219.9]]]);
     }
 }
-
-
-// global functions. 
