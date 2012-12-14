@@ -9,7 +9,7 @@
 // window.mapping namespace for the map-related functions.
 //
 
-server_ip = "190.73.9.70";
+server_ip = "190.73.12.114";
 geoserver_url = "http://"+ server_ip +":8080/geoserver/microzonas/wms";
 
 window.mapping = {
@@ -79,8 +79,9 @@ window.mapping = {
         map.addControl(new OpenLayers.Control.Navigation());
         map.zoomToExtent(bounds);
 
-        micro = new Microzona();
-        micro.registerMap(map, 'microzonas:Microzonas_Amenaza_General', 'http://'+server_ip+':8000/getmicrozone');
+        micro = new Microzonas();
+        //micro.registerMap(map, 'microzonas:Microzonas_Amenaza_General', 'http://'+server_ip+':8000/getmicrozone/');
+        micro.registerMap(map, 'microzonas:Microzonas_Amenaza_General', '/getmicrozone/');
     }
 }
 
