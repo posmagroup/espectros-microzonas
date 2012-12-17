@@ -58,3 +58,23 @@ Microzonas.prototype.registerMap = function(mapa, layers, url){
     });
 
 };
+
+Microzonas.prototype.espectro = function(T, A_0, phi, beta, T_A, T_0, T_star, T_D, m, p){
+    if(T < T_0){
+        return phi * A_0;
+    }
+    if(T_A <= T < T_0){
+        return phi * A_0 * (1 + ((T - T_A) * (beta - 1) / (T_0 - T_A)));
+    }
+    if(T_0 <= T < T_star){
+        return phi * beta * A_0 * Math.pow(T_0 / T, m);
+    }
+    if(T_star <= T < T_D){
+        return phi * beta * A_0 * Math.pow(T_0 / T_star, m) * Math.pow(T_star / T, p);
+    }
+    if(T_D <= T){
+        return phi * beta * A_0 * Math.pow(T_0 / T_star, m) * Math.pow(T_star / T_D, p) * Math.pow(T_D / T, 2);
+    }
+
+    return false; // error
+}
