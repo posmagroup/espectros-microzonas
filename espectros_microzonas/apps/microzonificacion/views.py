@@ -13,7 +13,7 @@ from pyquery import PyQuery as pq
 import requests
 from apps.microzonificacion.models import Microzone
 
-geoserver_url = getattr(settings, 'GEOSERVER_URL', 'http://localhost:8080/geoserver/microzonas/wms?')
+geoserver_url = 'http://localhost:8080/geoserver/microzonas/wms?'
 
 
 class MicrozoneDetail(JSONResponseMixin, DetailView):
@@ -46,7 +46,7 @@ class MicrozoneDetail(JSONResponseMixin, DetailView):
 
             return self.render_json_response(context_dict)
         except Exception, e:
-            print e
+            print "error = %" % e
             raise Http404
             #return HttpResponse()
 
@@ -56,11 +56,13 @@ class MicrozoneDetail(JSONResponseMixin, DetailView):
         The GEOSERVER_URL setting must be declared in settings. Defaults to localhost.
 
         """
-        response = requests.get(geoserver_url + urllib.urlencode(request.GET))
+        try:
+            response = requests.get(geoserver_url + urllib.urlencode(request.GET))
+        except Exception, e:
+            print "error = %s" % e
 
         pqobj = pq(response.content)
         tb = pqobj('table')
         attribute = tb('td').next().next().html()
-        #attr_slug = slugify(attribute)
-        #print "attr = %s" % attr_slug
+
         return attribute
