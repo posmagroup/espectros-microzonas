@@ -69,7 +69,7 @@ def espectro(T, A_0, phi, beta,
         hyp_fall_m = (T_0/T)**m
         phibetaA0 = beta*phiA0
         if T_0 <= T < T_star:
-            return phibetaA0_0*hyp_fall_m
+            return phibetaA0*hyp_fall_m
         else:
             hyp_fall_p = (T_star/T)**p
             if T_star <= T < T_D:
