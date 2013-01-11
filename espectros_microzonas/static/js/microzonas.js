@@ -61,19 +61,16 @@ Microzonas.prototype.registerMap = function(mapa, layers, url){
             esp = new espectro(phi, beta, arg_a0, arg_ta, arg_t0, arg_tstar, arg_td, arg_m, arg_p);
 
             $.jqplot('chartdiv',  [[[0, 0], [arg_ta, esp.calcular(arg_ta)], [arg_t0, esp.calcular(arg_t0)], [arg_tstar, esp.calcular(arg_tstar)], [arg_td, esp.calcular(arg_td)], [10, esp.calcular(10)]]],
-                    {
-                        title:'Espectros elásticos. Modelo de ajuste.',
-                        axes:{xaxis:{renderer: $.jqplot.LogAxisRenderer}}
-                    }
+                {
+                    title:'Espectros elásticos. Modelo de ajuste.',
+                    axes:{xaxis:{renderer: $.jqplot.LogAxisRenderer}}
+                }
             );
-
-
         });
 
         e.stopPropagation();
 
     });
-
 };
 
 var espectro = function(phi, beta, A_0, T_A, T_0, T_star, T_D, m, p){
@@ -92,16 +89,16 @@ var espectro = function(phi, beta, A_0, T_A, T_0, T_star, T_D, m, p){
 }
 
 espectro.prototype.calcular = function(T){
-    if(T < this.T_0){
+    if(T < this.T_A){
         return this.phi * this.A_0;
     }
-    if(this.T_A <= T < this.T_0){
+    if(this.T_A <= T && T < this.T_0){
         return this.phi * this.A_0 * (1 + ((T - this.T_A) * (this.beta - 1) / (this.T_0 - this.T_A)));
     }
-    if(this.T_0 <= T < this.T_star){
+    if(this.T_0 <= T && T < this.T_star){
         return this.phi * this.beta * this.A_0 * Math.pow(this.T_0 / T, this.m);
     }
-    if(this.T_star <= T < this.T_D){
+    if(this.T_star <= T && T < this.T_D){
         return this.phi * this.beta * this.A_0 * Math.pow(this.T_0 / this.T_star, this.m) * Math.pow(this.T_star / T, this.p);
     }
     if(this.T_D <= T){
