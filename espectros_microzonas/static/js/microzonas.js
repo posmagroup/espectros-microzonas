@@ -48,24 +48,35 @@ Microzonas.prototype.registerMap = function(mapa, layers, url){
 
         $.getJSON(url, params, function(response){
             //alert(response.responseText);
-            phi = response['phi'];
-            beta = response['beta'];
-            arg_a0 = response['arg_a0'];
-            arg_ta = response['arg_ta'];
-            arg_t0 = response['arg_t0'];
-            arg_tstar = response['arg_tstar'];
-            arg_td = response['arg_td'];
-            arg_m = response['arg_m'];
-            arg_p = response['arg_p'];
+
+            var phi = response['phi'];
+            var beta = response['beta'];
+            var arg_a0 = response['arg_a0'];
+            var arg_ta = response['arg_ta'];
+            var arg_t0 = response['arg_t0'];
+            var arg_tstar = response['arg_tstar'];
+            var arg_td = response['arg_td'];
+            var arg_m = response['arg_m'];
+            var arg_p = response['arg_p'];
 
             esp = new espectro(phi, beta, arg_a0, arg_ta, arg_t0, arg_tstar, arg_td, arg_m, arg_p);
 
-            $.jqplot('chartdiv',  [[[0, 0], [arg_ta, esp.calcular(arg_ta)], [arg_t0, esp.calcular(arg_t0)], [arg_tstar, esp.calcular(arg_tstar)], [arg_td, esp.calcular(arg_td)], [10, esp.calcular(10)]]],
+            var f_t0 = esp.calcular(arg_t0);
+            var f_ta = esp.calcular(arg_ta);
+            var f_tstar = esp.calcular(arg_tstar);
+            var f_td = esp.calcular(arg_td);
+
+            $.jqplot('chartdiv',  [[[arg_ta, f_ta], [arg_t0, f_t0], [arg_tstar, f_tstar], [arg_td, f_td]]],
                 {
                     title:'Espectros elásticos. Modelo de ajuste.',
                     axes:{xaxis:{renderer: $.jqplot.LogAxisRenderer}}
                 }
             );
+
+
+
+            //alert("phi = " + phi);
+            //alert("f(phi) = " + esp.calcular(phi));
         });
 
         e.stopPropagation();
