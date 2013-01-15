@@ -48,33 +48,73 @@ Microzonas.prototype.registerMap = function(mapa, layers, url){
 
         $.getJSON(url, params, function(response){
             //alert(response.responseText);
-            for (k in response){
-                alert(k + "= " + response[k]);
-            }
+
+            var phi = response['phi'];
+            var beta = response['beta'];
+            var arg_a0 = response['arg_a0'];
+            var arg_ta = response['arg_ta'];
+            var arg_t0 = response['arg_t0'];
+            var arg_tstar = response['arg_tstar'];
+            var arg_td = response['arg_td'];
+            var arg_m = response['arg_m'];
+            var arg_p = response['arg_p'];
+
+            esp = new espectro(phi, beta, arg_a0, arg_ta, arg_t0, arg_tstar, arg_td, arg_m, arg_p);
+
+            var f_t0 = esp.calcular(arg_t0);
+            var f_ta = esp.calcular(arg_ta);
+            var f_tstar = esp.calcular(arg_tstar);
+            var f_td = esp.calcular(arg_td);
+
+            $.jqplot('chartdiv',  [[[arg_ta, f_ta], [arg_t0, f_t0], [arg_tstar, f_tstar], [arg_td, f_td]]],
+                {
+                    title:'Espectros elásticos. Modelo de ajuste.',
+                    axes:{xaxis:{renderer: $.jqplot.LogAxisRenderer}}
+                }
+            );
+
+
+
+            //alert("phi = " + phi);
+            //alert("f(phi) = " + esp.calcular(phi));
         });
 
         e.stopPropagation();
 
     });
-
 };
 
-Microzonas.prototype.espectro = function(T, A_0, phi, beta, T_A, T_0, T_star, T_D, m, p){
-    if(T < T_0){
-        return phi * A_0;
+var espectro = function(phi, beta, A_0, T_A, T_0, T_star, T_D, m, p){
+
+    this.A_0 = A_0;
+    this.phi = phi;
+    this.beta = beta;
+    this.T_A = T_A;
+    this.T_0 = T_0;
+    this.T_star = T_star;
+    this.T_D = T_D;
+    this.m = m;
+    this.p = p;
+
+    return this;
+}
+
+espectro.prototype.calcular = function(T){
+    if(T < this.T_A){
+        return this.phi * this.A_0;
     }
-    if(T_A <= T < T_0){
-        return phi * A_0 * (1 + ((T - T_A) * (beta - 1) / (T_0 - T_A)));
+    if(this.T_A <= T && T < this.T_0){
+        return this.phi * this.A_0 * (1 + ((T - this.T_A) * (this.beta - 1) / (this.T_0 - this.T_A)));
     }
-    if(T_0 <= T < T_star){
-        return phi * beta * A_0 * Math.pow(T_0 / T, m);
+    if(this.T_0 <= T && T < this.T_star){
+        return this.phi * this.beta * this.A_0 * Math.pow(this.T_0 / T, this.m);
     }
-    if(T_star <= T < T_D){
-        return phi * beta * A_0 * Math.pow(T_0 / T_star, m) * Math.pow(T_star / T, p);
+    if(this.T_star <= T && T < this.T_D){
+        return this.phi * this.beta * this.A_0 * Math.pow(this.T_0 / this.T_star, this.m) * Math.pow(this.T_star / T, this.p);
     }
-    if(T_D <= T){
-        return phi * beta * A_0 * Math.pow(T_0 / T_star, m) * Math.pow(T_star / T_D, p) * Math.pow(T_D / T, 2);
+    if(this.T_D <= T){
+        return this.phi * this.beta * this.A_0 * Math.pow(this.T_0 / this.T_star, this.m) * Math.pow(this.T_star / this.T_D, this.p) * Math.pow(this.T_D / T, 2);
     }
 
     return false; // error
-}
+};
