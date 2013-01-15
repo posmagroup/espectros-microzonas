@@ -40,7 +40,7 @@ Microzonas_raw = [
 			'BETA': microzona_raw[3],
 			'T_A': microzona_raw[4],
 			'T_0': microzona_raw[5],
-			'T^*': microzona_raw[6],
+			'T_star': microzona_raw[6],
 			'T_D': microzona_raw[7],
 			'm': microzona_raw[8],
 			'p': microzona_raw[9]};
@@ -60,10 +60,13 @@ Microzonas_raw = [
 		
 			mz = Microzonas_params[prueba[0]];
 			var f = function(T){
-				return Microzonas.prototype.espectro(T, mz.A_0, mz.PHI, mz.BETA, mz.T_A, mz.T_0, mz.T_star, mz.T_D, mz.m, mz.p);
+				var m = new espectro(mz.PHI, mz.BETA, mz.A_0, mz.T_A, mz.T_0, mz.T_star, mz.T_D, mz.m, mz.p);
+
+				return m.calcular(T);
 			};
+			mz = Microzonas_params[prueba[0]];
 			f_ = f(prueba[1]);
-			ok(Math.abs(f_ - prueba[2]) < 0.00001, "Verificar con T=" + prueba[1] + " para MZ=" + prueba[0] + " que el espectro (" + f_ + ") sea cercano a " + prueba[2]);
+			ok(Math.abs(f_ - prueba[2]) < 0.00001, "Verificar con T=" + prueba[1] + " para MZ=" + prueba[0] + " {T_A: " + mz.T_A + ", T_0: " + mz.T_0 + ", T_star: " + mz.T_star + ", T_D: " + mz.T_D + "} que el espectro (" + f_ + ") sea cercano a " + prueba[2]);
 		});
 	});
 	
