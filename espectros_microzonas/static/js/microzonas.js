@@ -124,6 +124,8 @@ espectro.prototype.graficar = function(divname){
     var f_tstar = this.calcular(this.T_star);
     var f_td = this.calcular(this.T_D);
 
+    // Faltan los puntos que son
+
     $.jqplot(divname,  [[[this.T_A, f_ta], [this.T_0, f_t0], [this.T_star, f_tstar], [this.T_D, f_td]]],
         {
             axes:{

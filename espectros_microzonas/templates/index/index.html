@@ -36,32 +36,45 @@
 
             $( "#dialog" ).dialog({
                 autoOpen: false,
+                show:scale,
+                hide:scale,
                 width: 800,
                 height: 600
             });
-
+            /*
             $( "#opener" ).click(function() {
 
                 $( "#dialog" ).dialog( "open" );
 
                 $.jqplot('chartdiv',  [[[1, 2],[3,5.12],[5,13.1],[7,33.6],[9,85.9],[11,219.9]]],
                         {
-                            title:''
-                            //axes:{xaxis:{renderer: $.jqplot.LogAxisRenderer}}
+                            axes:{
+                                xaxis:{
+                                    renderer: $.jqplot.LogAxisRenderer,
+                                    label: "Período (s)"
+                                },
+                                yaxis:{
+                                    //label: "Aceleración (s)"
+                                }
+                            }
                         }
                 );
                 return false;
             });
+            */
         });
     });
 </script>
 {% endblock %}
 
 {% block content %}
-
+<!--
 <button id="opener">Click</button>
+-->
 
+<h1>Mapa de microzonas</h1>
 
+Haga click en una zona del mapa para visualizar la gráfica.<br><br>
 <div id="map"></div>
 <div id="wrapper">
     <div id="location"></div>
