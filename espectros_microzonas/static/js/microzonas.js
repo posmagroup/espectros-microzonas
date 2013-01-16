@@ -45,11 +45,12 @@ Microzonas.prototype.registerMap = function(mapa, layers, url){
         if(mapa.layers[0].params.FEATUREID) {
             params.featureid = mapa.layers[0].params.FEATUREID;
         }
-        alert("el beta");
-        /*
+
+
         $.getJSON(url, params, function(response){
             //alert(response.responseText);
 
+            var id = response['id'];    // <--- verificar
             var phi = response['phi'];
             var beta = response['beta'];
             var arg_a0 = response['arg_a0'];
@@ -60,33 +61,19 @@ Microzonas.prototype.registerMap = function(mapa, layers, url){
             var arg_m = response['arg_m'];
             var arg_p = response['arg_p'];
 
-            esp = new espectro(phi, beta, arg_a0, arg_ta, arg_t0, arg_tstar, arg_td, arg_m, arg_p);
+            esp = new espectro(id, phi, beta, arg_a0, arg_ta, arg_t0, arg_tstar, arg_td, arg_m, arg_p);
+            $( "#dialog" ).dialog( "open" );
+            esp.graficar("chartdiv");
 
-            var f_t0 = esp.calcular(arg_t0);
-            var f_ta = esp.calcular(arg_ta);
-            var f_tstar = esp.calcular(arg_tstar);
-            var f_td = esp.calcular(arg_td);
-
-            $.jqplot('chartdiv',  [[[arg_ta, f_ta], [arg_t0, f_t0], [arg_tstar, f_tstar], [arg_td, f_td]]],
-                {
-                    title:'Espectros elásticos. Modelo de ajuste.',
-                    axes:{xaxis:{renderer: $.jqplot.LogAxisRenderer}}
-                }
-            );
-
-
-
-            //alert("phi = " + phi);
-            //alert("f(phi) = " + esp.calcular(phi));
         });
-        */
+
         e.stopPropagation();
 
     });
 };
 
-var espectro = function(phi, beta, A_0, T_A, T_0, T_star, T_D, m, p){
-
+var espectro = function(id, phi, beta, A_0, T_A, T_0, T_star, T_D, m, p){
+    this.id = id;
     this.A_0 = A_0;
     this.phi = phi;
     this.beta = beta;
@@ -118,4 +105,37 @@ espectro.prototype.calcular = function(T){
     }
 
     return false; // error
+};
+
+espectro.prototype.graficar = function(divname){
+    $("#mzid").html(this.id);
+    $("#val_phi").html(this.phi);
+    $("#val_beta").html(this.beta);
+    $("#val_a0").html(this.A_0);
+    $("#val_m").html(this.m);
+    $("#val_p").html(this.p);
+    $("#val_t0").html(this.T_0);
+    $("#val_ta").html(this.T_A);
+    $("#val_td").html(this.T_D);
+    $("#val_tstar").html(this.T_star);
+
+    var f_t0 = this.calcular(this.T_0);
+    var f_ta = this.calcular(this.T_A);
+    var f_tstar = this.calcular(this.T_star);
+    var f_td = this.calcular(this.T_D);
+
+    $.jqplot(divname,  [[[this.T_A, f_ta], [this.T_0, f_t0], [this.T_star, f_tstar], [this.T_D, f_td]]],
+        {
+            axes:{
+                xaxis:{
+                    renderer: $.jqplot.LogAxisRenderer,
+                    label: "Período (s)"
+                },
+                yaxis:{
+                    label: "Aceleración (s)"
+                }
+            }
+        }
+    );
+
 };
