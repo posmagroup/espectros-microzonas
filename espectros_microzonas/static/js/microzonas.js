@@ -45,7 +45,8 @@ Microzonas.prototype.registerMap = function(mapa, layers, url){
         if(mapa.layers[0].params.FEATUREID) {
             params.featureid = mapa.layers[0].params.FEATUREID;
         }
-
+        alert("el beta");
+        /*
         $.getJSON(url, params, function(response){
             //alert(response.responseText);
 
@@ -78,7 +79,7 @@ Microzonas.prototype.registerMap = function(mapa, layers, url){
             //alert("phi = " + phi);
             //alert("f(phi) = " + esp.calcular(phi));
         });
-
+        */
         e.stopPropagation();
 
     });

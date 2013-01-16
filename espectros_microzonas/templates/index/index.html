@@ -14,7 +14,8 @@
 
 <script>
     $(document).ready(function(){
-        window.mapping.init();
+
+        //window.mapping.init();
         //window.charts.plot_test();
         /*showAttributes = function(response){
             alert("hola " + response.responseText);
@@ -26,18 +27,72 @@
         showAttributesError = function(response){
             alert("error " + response.responseText);
         };*/
+//        $.fx.speeds._default = 1000;
+
+
+
+        $(function() {
+
+
+            $( "#dialog" ).dialog({
+                autoOpen: false,
+                width: 800,
+                height: 600
+            });
+
+            $( "#opener" ).click(function() {
+
+                $( "#dialog" ).dialog( "open" );
+                $.jqplot('chartdiv',  [[[1, 2],[3,5.12],[5,13.1],[7,33.6],[9,85.9],[11,219.9]]],
+                        {
+                            title:''
+                            //axes:{xaxis:{renderer: $.jqplot.LogAxisRenderer}}
+                        }
+                );
+                return false;
+            });
+        });
     });
 </script>
 {% endblock %}
 
 {% block content %}
+
+<button id="opener">Click</button>
+
+
 <div id="map"></div>
 <div id="wrapper">
     <div id="location"></div>
     <div id="scale">
     </div>
 </div>
+
+<div id="dialog" style="display: none">
+    <h3>Microzona: <span id="mzid"></span></h3>
+    <div id="attribute_table">
+        <table style="padding-left: 15px">
+            <tr>
+                <td>phi</td><td id="val_phi">0.324</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>beta</td><td id="val_beta">0.324</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>A<sub>0</sub></td><td id="val_a0">0.324</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>T<sub>A</sub></td><td id="val_ta">0.324</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>T<sub>0</sub></td><td id="val_t0">0.234</td>
+            </tr>
+            <tr>
+                <td>T<sup>*</sup></td><td id="val_tstar">0.324</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>T<sub>D</sub></td><td id="val_td">0.324</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>m</td><td id="val_m">0.324</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>p</td><td id="val_p">0.324</td><td colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+
+            </tr>
+        </table>
+    </div>
+    <h3>Función de espectro</h3>
+    <div id="chartdiv" style="height:300px;width:700px; "></div>
+</div>
 <!--<div id="attribute_table" style="display: none">-->
-<div id="chartdiv" style="height:400px;width:300px; "></div>
+
 
 {% endblock %}
