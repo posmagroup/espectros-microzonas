@@ -33,6 +33,7 @@ class MicrozoneDetail(JSONResponseMixin, DetailView):
             obj = self.get_object(label=attr)
 
             context_dict = {
+                'name': attr,
                 'arg_a0': obj.arg_a0,
                 'phi': obj.phi,
                 'beta': obj.beta,

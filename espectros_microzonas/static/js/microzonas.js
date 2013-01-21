@@ -50,7 +50,7 @@ Microzonas.prototype.registerMap = function(mapa, layers, url){
         $.getJSON(url, params, function(response){
             //alert(response.responseText);
 
-            var id = response['id'];    // <--- verificar
+            var name = response['name'];    // <--- verificar
             var phi = response['phi'];
             var beta = response['beta'];
             var arg_a0 = response['arg_a0'];
@@ -61,7 +61,7 @@ Microzonas.prototype.registerMap = function(mapa, layers, url){
             var arg_m = response['arg_m'];
             var arg_p = response['arg_p'];
 
-            esp = new espectro(id, phi, beta, arg_a0, arg_ta, arg_t0, arg_tstar, arg_td, arg_m, arg_p);
+            esp = new espectro(name, phi, beta, arg_a0, arg_ta, arg_t0, arg_tstar, arg_td, arg_m, arg_p);
             $( "#dialog" ).dialog( "open" );
             esp.graficar("chartdiv");
 
@@ -72,8 +72,8 @@ Microzonas.prototype.registerMap = function(mapa, layers, url){
     });
 };
 
-var espectro = function(id, phi, beta, A_0, T_A, T_0, T_star, T_D, m, p){
-    this.id = id;
+var espectro = function(name, phi, beta, A_0, T_A, T_0, T_star, T_D, m, p){
+    this.name = name;
     this.A_0 = A_0;
     this.phi = phi;
     this.beta = beta;
@@ -108,7 +108,7 @@ espectro.prototype.calcular = function(T){
 };
 
 espectro.prototype.graficar = function(divname){
-    $("#mzid").html(this.id);
+    $("#mzid").html(this.name);
     $("#val_phi").html(this.phi);
     $("#val_beta").html(this.beta);
     $("#val_a0").html(this.A_0);
@@ -128,13 +128,19 @@ espectro.prototype.graficar = function(divname){
 
     $.jqplot(divname,  [[[this.T_A, f_ta], [this.T_0, f_t0], [this.T_star, f_tstar], [this.T_D, f_td]]],
         {
+            axesDefaults: {
+                tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                tickOptions: {
+                    fontSize: '8pt'
+                }
+            },
             axes:{
                 xaxis:{
                     renderer: $.jqplot.LogAxisRenderer,
                     label: "Período (s)"
                 },
                 yaxis:{
-                    label: "Aceleración (s)"
+                    //label: "Aceleración (s)"
                 }
             }
         }

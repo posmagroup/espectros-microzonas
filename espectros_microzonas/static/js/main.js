@@ -9,16 +9,13 @@
 // window.mapping namespace for the map-related functions.
 //
 
-server_ip = "190.73.8.114";
+server_ip = "190.73.8.141";
 geoserver_url = "http://"+ server_ip +":8080/geoserver/microzonas/wms";
 
 window.mapping = {
     handler: function (request) {
         // do something with the response
         alert(request.responseText);
-        /*for (var key in request){
-            alert(key + ":" + request[key]);
-        }*/
      },
 
     init: function() {
@@ -81,6 +78,5 @@ window.mapping = {
 
         micro = new Microzonas();
         micro.registerMap(map, 'microzonas:Microzonas_Amenaza_General', '/getmicrozone/');
-
     }
 }
