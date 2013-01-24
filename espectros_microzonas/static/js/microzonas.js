@@ -126,9 +126,17 @@ espectro.prototype.graficar = function(divname){
     // Faltan los puntos que son
     //var points = [[[0.01, this.calcular(0.01)], [this.T_A, f_ta], [this.T_0, f_t0], [this.T_star, f_tstar], [this.T_D, f_td]]];
     //var points = [[[0.1, this.calcular(0.1)], [0.2, this.calcular(0.2)], [0.3, this.calcular(0.3)], [0.4, this.calcular(0.4)], [0.5, this.calcular(0.5)], [0.6, this.calcular(0.6)], [0.7, this.calcular(0.7)], [0.8, this.calcular(0.8)], [0.9, this.calcular(0.9)], [1.0, this.calcular(1.0)], [1.1, this.calcular(1.1)], [1.2, this.calcular(1.2)], [1.3, this.calcular(1.3)], [1.4, this.calcular(1.4)], [1.5, this.calcular(1.5)], [1.6, this.calcular(1.6)], [1.7, this.calcular(1.7)], [1.8, this.calcular(1.8)], [1.9, this.calcular(1.9)], [2.0, this.calcular(2.0)], [2.1, this.calcular(2.1)], [2.2, this.calcular(2.2)], [2.3, this.calcular(2.3)], [2.4, this.calcular(2.4)], [2.5, this.calcular(2.5)], [2.6, this.calcular(2.6)], [2.7, this.calcular(2.7)], [2.8, this.calcular(2.8)], [2.9, this.calcular(2.9)], [3.0, this.calcular(3.0)], [3.1, this.calcular(3.1)], [3.2, this.calcular(3.2)], [3.3, this.calcular(3.3)], [3.4, this.calcular(3.4)], [3.5, this.calcular(3.5)]]];
-    var points = this.generateGraphPoints();
+    var logspace = generateLogSpace();  // retorna undefined
+    var points = [];
+    for(var i = 0; i < logspace.length; i++){
+        alert("x = " + response[i]);
+        alert("y = " + this.calcular(response[i]));
+        var point = [logspace[i], this.calcular(logspace[i])];
+        points.push(point);
+    }
+
     //alert(points);
-    $.jqplot(divname,  points,
+    $.jqplot(divname,  [points],
         {
             axesDefaults: {
                 tickRenderer: $.jqplot.CanvasAxisTickRenderer,
@@ -155,17 +163,9 @@ espectro.prototype.graficar = function(divname){
 
 };
 
-espectro.prototype.generateGraphPoints = function(){
+var generateLogSpace = function(){
     $.getJSON('/logspace/', {}, function(response){
-        points = Array();
-
-        for(var i = 0; i < response.length; i++){
-            alert("x = " + response[i]);
-            alert("y = " + this.calcular(response[i]));/*   // "this" no sabe a dónde va, parece.
-            var point = [response[i], this.calcular(response[i])];
-            points.push(point);*/
-        }
-        return [points];
+        return response;
     });
 };
 
