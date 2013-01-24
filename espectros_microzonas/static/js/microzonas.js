@@ -125,7 +125,7 @@ espectro.prototype.graficar = function(divname){
 
     // Faltan los puntos que son
 
-    
+
     $.jqplot(divname,  [[[0.01, this.calcular(0.01)], [this.T_A, f_ta], [this.T_0, f_t0], [this.T_star, f_tstar], [this.T_D, f_td]]],
         {
             axesDefaults: {
@@ -137,7 +137,8 @@ espectro.prototype.graficar = function(divname){
             axes:{
                 xaxis:{
                     renderer: $.jqplot.LogAxisRenderer,
-                    label: "Período (s)"
+
+                    //label: "Período (s)"
                 },
                 yaxis:{
                     //label: "Aceleración (s)"

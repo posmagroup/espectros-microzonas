@@ -7,6 +7,38 @@
         height: 450px;
         border: 1px solid black;
     }
+
+    .jqplot-target {
+        position: relative;
+        color: #fff;
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 18px;
+    }
+
+    .jqplot-axis {
+        font-size: 0.75em;
+    }
+
+    .jqplot-xaxis {
+        margin-top: 10px;
+    }
+
+    .jqplot-yaxis {
+        margin-right: 10px;
+    }
+
+    table.jqplot-cursor-tooltip {
+        border: 1px solid #cccccc;
+        font-size: 0.75em;
+    }
+
+    .jqplot-cursor-tooltip {
+        border: 1px solid #cccccc;
+        font-size: 0.75em;
+        white-space: nowrap;
+        background: rgba(0, 0, 0, 1);
+        padding: 1px;
+    }
 </style>
 {% endblock %}
 
@@ -43,34 +75,14 @@
 
             $( "#dialog" ).dialog({
                 autoOpen: false,
-                show:scale,
-                hide:scale,
+                show:'scale',
+                hide:'scale',
                 width: 800,
                 height: 600
             });
 
             grapficarDummy();
-            /*
-            $( "#opener" ).click(function() {
 
-                $( "#dialog" ).dialog( "open" );
-
-                $.jqplot('chartdiv',  [[[1, 2],[3,5.12],[5,13.1],[7,33.6],[9,85.9],[11,219.9]]],
-                        {
-                            axes:{
-                                xaxis:{
-                                    renderer: $.jqplot.LogAxisRenderer,
-                                    label: "Período (s)"
-                                },
-                                yaxis:{
-                                    //label: "Aceleración (s)"
-                                }
-                            }
-                        }
-                );
-                return false;
-            });
-            */
         });
     });
 </script>
@@ -113,7 +125,7 @@ Haga click en una zona del mapa para visualizar la gráfica.<br><br>
             </tr>
         </table>
     </div>
-    <h3>Espectros elásticos. Modelo de ajuste.</h3>
+    <h3>Gráfica del espectro elástico</h3>
     <div id="chartdiv" style="height:300px;width:750px; "></div>
 </div>
 <!--<div id="attribute_table" style="display: none">-->
