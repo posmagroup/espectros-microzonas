@@ -14,8 +14,15 @@
 
 <script>
     $(document).ready(function(){
+/*
+        $('body').css('text-align','center');
+        $('#map').css('width', '400px');
+        $('#map').css('margin-left', 'auto');
+        $('#map').css('margin-right', 'auto');*/
 
-        window.mapping.init();
+        //window.mapping.init();
+
+
         //window.charts.plot_test();
         /*showAttributes = function(response){
             alert("hola " + response.responseText);
@@ -41,6 +48,8 @@
                 width: 800,
                 height: 600
             });
+
+            grapficarDummy();
             /*
             $( "#opener" ).click(function() {
 
@@ -75,6 +84,7 @@
 <h1>Mapa de microzonas</h1>
 
 Haga click en una zona del mapa para visualizar la gráfica.<br><br>
+
 <div id="map"></div>
 <div id="wrapper">
     <div id="location"></div>

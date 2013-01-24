@@ -46,7 +46,6 @@ Microzonas.prototype.registerMap = function(mapa, layers, url){
             params.featureid = mapa.layers[0].params.FEATUREID;
         }
 
-
         $.getJSON(url, params, function(response){
             //alert(response.responseText);
 
@@ -126,7 +125,8 @@ espectro.prototype.graficar = function(divname){
 
     // Faltan los puntos que son
 
-    $.jqplot(divname,  [[[this.T_A, f_ta], [this.T_0, f_t0], [this.T_star, f_tstar], [this.T_D, f_td]]],
+    
+    $.jqplot(divname,  [[[0.01, this.calcular(0.01)], [this.T_A, f_ta], [this.T_0, f_t0], [this.T_star, f_tstar], [this.T_D, f_td]]],
         {
             axesDefaults: {
                 tickRenderer: $.jqplot.CanvasAxisTickRenderer,
@@ -146,4 +146,21 @@ espectro.prototype.graficar = function(divname){
         }
     );
 
+};
+
+var grapficarDummy = function(){
+    var name = 'R2-T1';
+    var phi = 1.2;
+    var beta = 2.35;
+    var arg_a0 = 0.265;
+    var arg_ta = 0.02;
+    var arg_t0 = 0.1;
+    var arg_tstar = 0.35;
+    var arg_td = 2.6;
+    var arg_m = 0;
+    var arg_p = 1;
+
+    esp = new espectro(name, phi, beta, arg_a0, arg_ta, arg_t0, arg_tstar, arg_td, arg_m, arg_p);
+    $( "#dialog" ).dialog( "open" );
+    esp.graficar("chartdiv");
 };
