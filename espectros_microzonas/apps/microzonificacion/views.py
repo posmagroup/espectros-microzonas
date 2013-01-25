@@ -12,21 +12,19 @@ from django.views.generic.base import TemplateView
 from pyquery import PyQuery as pq
 
 import requests
-import numpy
+#import numpy
 
 from apps.microzonificacion.models import Microzone
 
 geoserver_url = 'http://localhost:8080/geoserver/microzonas/wms?'
 
-class LogSpace(JSONResponseMixin, TemplateView):
-    """
-    Returns a JSON array containing a sequence of equidistant points in the log scale
 
-    """
-    def get(self, request, *args, **kwargs):
-        arr = numpy.logspace(-5.0, 3.0, num=30, base=2)
-        #print arr
-        return self.render_json_response(list(arr))
+#class LogSpace(JSONResponseMixin, TemplateView):
+#
+#    def get(self, request, *args, **kwargs):
+#        arr = numpy.logspace(-7.0, 3.5, num=40, base=2)
+#        print arr
+#        return self.render_json_response(list(arr))
 
 class MicrozoneDetail(JSONResponseMixin, DetailView):
     """
