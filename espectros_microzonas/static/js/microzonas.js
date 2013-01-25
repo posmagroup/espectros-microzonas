@@ -126,11 +126,11 @@ espectro.prototype.graficar = function(divname){
     // Faltan los puntos que son
     //var points = [[[0.01, this.calcular(0.01)], [this.T_A, f_ta], [this.T_0, f_t0], [this.T_star, f_tstar], [this.T_D, f_td]]];
     //var points = [[[0.1, this.calcular(0.1)], [0.2, this.calcular(0.2)], [0.3, this.calcular(0.3)], [0.4, this.calcular(0.4)], [0.5, this.calcular(0.5)], [0.6, this.calcular(0.6)], [0.7, this.calcular(0.7)], [0.8, this.calcular(0.8)], [0.9, this.calcular(0.9)], [1.0, this.calcular(1.0)], [1.1, this.calcular(1.1)], [1.2, this.calcular(1.2)], [1.3, this.calcular(1.3)], [1.4, this.calcular(1.4)], [1.5, this.calcular(1.5)], [1.6, this.calcular(1.6)], [1.7, this.calcular(1.7)], [1.8, this.calcular(1.8)], [1.9, this.calcular(1.9)], [2.0, this.calcular(2.0)], [2.1, this.calcular(2.1)], [2.2, this.calcular(2.2)], [2.3, this.calcular(2.3)], [2.4, this.calcular(2.4)], [2.5, this.calcular(2.5)], [2.6, this.calcular(2.6)], [2.7, this.calcular(2.7)], [2.8, this.calcular(2.8)], [2.9, this.calcular(2.9)], [3.0, this.calcular(3.0)], [3.1, this.calcular(3.1)], [3.2, this.calcular(3.2)], [3.3, this.calcular(3.3)], [3.4, this.calcular(3.4)], [3.5, this.calcular(3.5)]]];
-    var logspace = generateLogSpace();  // retorna undefined
+    var logspace = logSpace();
     var points = [];
     for(var i = 0; i < logspace.length; i++){
-        alert("x = " + response[i]);
-        alert("y = " + this.calcular(response[i]));
+        //alert("x = " + logspace[i]);
+        //alert("y = " + this.calcular(logspace[i]));
         var point = [logspace[i], this.calcular(logspace[i])];
         points.push(point);
     }
@@ -162,13 +162,24 @@ espectro.prototype.graficar = function(divname){
     );
 
 };
-
+/*
 var generateLogSpace = function(){
     $.getJSON('/logspace/', {}, function(response){
         return response;
     });
-};
+};*/
 
+var logSpace = function(){
+    return [
+        7.81250000e-03, 9.41535214e-03, 1.13470536e-02, 1.36750726e-02, 1.64807199e-02, 1.98619881e-02,
+        2.39369743e-02, 2.88480054e-02, 3.47666086e-02, 4.18995025e-02, 5.04958170e-02, 6.08557950e-02,
+        7.33412788e-02, 8.83883476e-02, 1.06522550e-01,  1.28377256e-01, 1.54715786e-01, 1.86458061e-01,
+        2.24712743e-01, 2.70815950e-01, 3.26377924e-01, 3.93339276e-01, 4.74038757e-01, 5.71294954e-01,
+        6.88504726e-01, 8.29761849e-01, 1.00000000e+00, 1.20516507e+00, 1.45242286e+00, 1.75040930e+00,
+        2.10953215e+00, 2.54233447e+00, 3.06393271e+00, 3.69254470e+00, 4.45012590e+00, 5.36313632e+00,
+        6.46346458e+00, 7.78954177e+00, 9.38768368e+00, 1.13137085e+01
+    ];
+};
 var graficarDummy = function(){
     var name = 'R2-T1';
     var phi = 1.2;
