@@ -54,24 +54,7 @@
 
         window.mapping.init();
 
-        //window.charts.plot_test();
-        /*showAttributes = function(response){
-            alert("hola " + response.responseText);
-            for (var key in response){
-                alert(key + ":" + response[key]);
-            }
-        };
-
-        showAttributesError = function(response){
-            alert("error " + response.responseText);
-        };*/
-//        $.fx.speeds._default = 1000;
-
-
-
         $(function() {
-
-
             $( "#dialog" ).dialog({
                 autoOpen: false,
                 show:'scale',
@@ -81,6 +64,13 @@
             });
         });
     });
+/*
+    //
+    var generateLogSpace = function(){
+        $.getJSON('/logspace/', {}, function(response){
+            return response;
+        });
+    };*/
 </script>
 {% endblock %}
 

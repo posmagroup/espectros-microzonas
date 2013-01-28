@@ -2,76 +2,8 @@
  *
  *
  * */
-var Microzonas = function(opt_config){
-    var map;
 
-    opt_config = opt_config || {
-        //url = ""// default parameters
-    };
-
-    // si no se especifican opciones, se definen unos parámetros por defecto
-    return this;
-};
-
-Microzonas.prototype.registerMap = function(mapa, layers, url){
-    this.map = mapa;
-    //alert("handler = " + this.handler);
-    mapa.events.register('click', mapa, function (e) {
-
-        var params = {
-            REQUEST: "GetFeatureInfo",
-            EXCEPTIONS: "application/vnd.ogc.gml",
-            BBOX: mapa.getExtent().toBBOX(), //????
-            SERVICE: "WMS",
-            INFO_FORMAT: 'text/html',
-            QUERY_LAYERS: mapa.layers[0].params.LAYERS,
-            FEATURE_COUNT: 50,
-            Layers: layers, //'microzonas:Microzonas_Amenaza_General',
-            X: Math.round(e.xy.x),
-            Y: Math.round(e.xy.y),
-            WIDTH: mapa.size.w,
-            HEIGHT: mapa.size.h,
-            format: format,
-            styles: mapa.layers[0].params.STYLES,
-            srs: mapa.layers[0].params.SRS};
-
-        // merge filters
-        if(mapa.layers[0].params.CQL_FILTER != null) {
-            params.cql_filter = mapa.layers[0].params.CQL_FILTER;
-        }
-        if(mapa.layers[0].params.FILTER != null) {
-            params.filter = mapa.layers[0].params.FILTER;
-        }
-        if(mapa.layers[0].params.FEATUREID) {
-            params.featureid = mapa.layers[0].params.FEATUREID;
-        }
-
-        $.getJSON(url, params, function(response){
-            //alert(response.responseText);
-
-            var name = response['name'];    // <--- verificar
-            var phi = response['phi'];
-            var beta = response['beta'];
-            var arg_a0 = response['arg_a0'];
-            var arg_ta = response['arg_ta'];
-            var arg_t0 = response['arg_t0'];
-            var arg_tstar = response['arg_tstar'];
-            var arg_td = response['arg_td'];
-            var arg_m = response['arg_m'];
-            var arg_p = response['arg_p'];
-
-            esp = new espectro(name, phi, beta, arg_a0, arg_ta, arg_t0, arg_tstar, arg_td, arg_m, arg_p);
-            $( "#dialog" ).dialog( "open" );
-            esp.graficar("chartdiv");
-
-        });
-
-        e.stopPropagation();
-
-    });
-};
-
-var espectro = function(name, phi, beta, A_0, T_A, T_0, T_star, T_D, m, p){
+var Espectro = function(name, phi, beta, A_0, T_A, T_0, T_star, T_D, m, p){
     this.name = name;
     this.A_0 = A_0;
     this.phi = phi;
@@ -86,7 +18,7 @@ var espectro = function(name, phi, beta, A_0, T_A, T_0, T_star, T_D, m, p){
     return this;
 }
 
-espectro.prototype.calcular = function(T){
+Espectro.prototype.calcular = function(T){
     if(T < this.T_A){
         return this.phi * this.A_0;
     }
@@ -106,94 +38,34 @@ espectro.prototype.calcular = function(T){
     return false; // error
 };
 
-espectro.prototype.graficar = function(divname){
-    $("#mzid").html(this.name);
-    $("#val_phi").html(this.phi);
-    $("#val_beta").html(this.beta);
-    $("#val_a0").html(this.A_0);
-    $("#val_m").html(this.m);
-    $("#val_p").html(this.p);
-    $("#val_t0").html(this.T_0);
-    $("#val_ta").html(this.T_A);
-    $("#val_td").html(this.T_D);
-    $("#val_tstar").html(this.T_star);
+Espectro.prototype.obtenerPuntos = function(divname){
 
-    var f_t0 = this.calcular(this.T_0);
+/*    var f_t0 = this.calcular(this.T_0);
     var f_ta = this.calcular(this.T_A);
     var f_tstar = this.calcular(this.T_star);
-    var f_td = this.calcular(this.T_D);
+    var f_td = this.calcular(this.T_D);*/
 
-    // Faltan los puntos que son
-    //var points = [[[0.01, this.calcular(0.01)], [this.T_A, f_ta], [this.T_0, f_t0], [this.T_star, f_tstar], [this.T_D, f_td]]];
-    //var points = [[[0.1, this.calcular(0.1)], [0.2, this.calcular(0.2)], [0.3, this.calcular(0.3)], [0.4, this.calcular(0.4)], [0.5, this.calcular(0.5)], [0.6, this.calcular(0.6)], [0.7, this.calcular(0.7)], [0.8, this.calcular(0.8)], [0.9, this.calcular(0.9)], [1.0, this.calcular(1.0)], [1.1, this.calcular(1.1)], [1.2, this.calcular(1.2)], [1.3, this.calcular(1.3)], [1.4, this.calcular(1.4)], [1.5, this.calcular(1.5)], [1.6, this.calcular(1.6)], [1.7, this.calcular(1.7)], [1.8, this.calcular(1.8)], [1.9, this.calcular(1.9)], [2.0, this.calcular(2.0)], [2.1, this.calcular(2.1)], [2.2, this.calcular(2.2)], [2.3, this.calcular(2.3)], [2.4, this.calcular(2.4)], [2.5, this.calcular(2.5)], [2.6, this.calcular(2.6)], [2.7, this.calcular(2.7)], [2.8, this.calcular(2.8)], [2.9, this.calcular(2.9)], [3.0, this.calcular(3.0)], [3.1, this.calcular(3.1)], [3.2, this.calcular(3.2)], [3.3, this.calcular(3.3)], [3.4, this.calcular(3.4)], [3.5, this.calcular(3.5)]]];
-    var logspace = logSpace();
+    var logspace = this.logSpace();
     var points = [];
+
     for(var i = 0; i < logspace.length; i++){
-        //alert("x = " + logspace[i]);
-        //alert("y = " + this.calcular(logspace[i]));
         var point = [logspace[i], this.calcular(logspace[i])];
         points.push(point);
     }
 
-    //alert(points);
-    $.jqplot(divname,  [points],
-        {
-            axesDefaults: {
-                tickRenderer: $.jqplot.CanvasAxisTickRenderer,
-                tickOptions: {
-                    fontSize: '8pt'
-                }
-                //,showTickMarks: false  //???
-            },
-            seriesDefaults: {
-                showMarker: false
-            },
-            axes:{
-                xaxis:{
-                    renderer: $.jqplot.LogAxisRenderer
-
-                    //label: "Período (s)"
-                },
-                yaxis:{
-                    //label: "Aceleración (s)"
-                }
-            }
-        }
-    );
-
+    return points;
 };
-/*
-var generateLogSpace = function(){
-    $.getJSON('/logspace/', {}, function(response){
-        return response;
-    });
-};*/
 
-var logSpace = function(){
+Espectro.prototype.logSpace = function(){
     return [
-        7.81250000e-03, 9.41535214e-03, 1.13470536e-02, 1.36750726e-02, 1.64807199e-02, 1.98619881e-02,
-        2.39369743e-02, 2.88480054e-02, 3.47666086e-02, 4.18995025e-02, 5.04958170e-02, 6.08557950e-02,
-        7.33412788e-02, 8.83883476e-02, 1.06522550e-01,  1.28377256e-01, 1.54715786e-01, 1.86458061e-01,
-        2.24712743e-01, 2.70815950e-01, 3.26377924e-01, 3.93339276e-01, 4.74038757e-01, 5.71294954e-01,
-        6.88504726e-01, 8.29761849e-01, 1.00000000e+00, 1.20516507e+00, 1.45242286e+00, 1.75040930e+00,
-        2.10953215e+00, 2.54233447e+00, 3.06393271e+00, 3.69254470e+00, 4.45012590e+00, 5.36313632e+00,
-        6.46346458e+00, 7.78954177e+00, 9.38768368e+00, 1.13137085e+01
+        1.10485435e-02, 1.31975163e-02, 1.57644704e-02, 1.88307043e-02, 2.24933293e-02, 2.68683452e-02, 3.20943141e-02,
+        3.83367486e-02, 4.57933542e-02, 5.47002906e-02, 6.53396512e-02, 7.80483975e-02, 9.32290307e-02, 1.11362340e-01,
+        1.33022629e-01, 1.58895905e-01, 1.89801606e-01, 2.26718553e-01, 2.70815950e-01, 3.23490415e-01, 3.86410212e-01,
+        4.61568087e-01, 5.51344380e-01, 6.58582416e-01, 7.86678551e-01, 9.39689745e-01, 1.12246205e+00, 1.34078408e+00,
+        1.60157036e+00, 1.91308031e+00, 2.28517982e+00, 2.72965373e+00, 3.26057907e+00, 3.89477088e+00, 4.65231479e+00,
+        5.55720313e+00, 6.63809479e+00, 7.92922293e+00, 9.47147913e+00, 1.13137085e+01
     ];
 };
-var graficarDummy = function(){
-    var name = 'R2-T1';
-    var phi = 1.2;
-    var beta = 2.35;
-    var arg_a0 = 0.265;
-    var arg_ta = 0.02;
-    var arg_t0 = 0.1;
-    var arg_tstar = 0.35;
-    var arg_td = 2.6;
-    var arg_m = 0;
-    var arg_p = 1;
 
-    esp = new espectro(name, phi, beta, arg_a0, arg_ta, arg_t0, arg_tstar, arg_td, arg_m, arg_p);
-    $( "#dialog" ).dialog( "open" );
-    esp.graficar("chartdiv");
-};
+
 

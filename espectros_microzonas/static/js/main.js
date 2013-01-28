@@ -9,14 +9,70 @@
 // window.mapping namespace for the map-related functions.
 //
 
-server_ip = "190.73.8.141";
+server_ip = "190.73.11.219";
 geoserver_url = "http://"+ server_ip +":8080/geoserver/microzonas/wms";
 
 window.mapping = {
-    handler: function (request) {
-        // do something with the response
-        alert(request.responseText);
-     },
+    handler: function (e) {
+
+    },
+
+    graficarEspectro: function(espectro){
+        $("#mzid").html(espectro.name);
+        $("#val_phi").html(espectro.phi);
+        $("#val_beta").html(espectro.beta);
+        $("#val_a0").html(espectro.A_0);
+        $("#val_m").html(espectro.m);
+        $("#val_p").html(espectro.p);
+        $("#val_t0").html(espectro.T_0);
+        $("#val_ta").html(espectro.T_A);
+        $("#val_td").html(espectro.T_D);
+        $("#val_tstar").html(espectro.T_star);
+
+        var points = espectro.obtenerPuntos();
+
+        $.jqplot('chartdiv',  [points],
+                {
+                    axesDefaults: {
+                        tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                        tickOptions: {
+                            fontSize: '8pt'
+                        }
+                        //,showTickMarks: false  //???
+                    },
+                    seriesDefaults: {
+                        showMarker: false
+                    },
+                    axes:{
+                        xaxis:{
+                            renderer: $.jqplot.LogAxisRenderer
+
+                            //label: "Período (s)"
+                        },
+                        yaxis:{
+                            //label: "Aceleración (s)"
+                        }
+                    }
+                }
+        );
+    },
+
+    graficarDummy: function(){
+        var name = 'R2-T1';
+        var phi = 1.2;
+        var beta = 2.35;
+        var arg_a0 = 0.265;
+        var arg_ta = 0.02;
+        var arg_t0 = 0.1;
+        var arg_tstar = 0.35;
+        var arg_td = 2.6;
+        var arg_m = 0;
+        var arg_p = 1;
+
+        esp = new Espectro(name, phi, beta, arg_a0, arg_ta, arg_t0, arg_tstar, arg_td, arg_m, arg_p);
+        $( "#dialog" ).dialog( "open" );
+        this.graficarEspectro(esp);
+    },
 
     init: function() {
         //OpenLayers.ProxyHost="/proxyhost?url=";
@@ -76,7 +132,56 @@ window.mapping = {
         map.addControl(new OpenLayers.Control.Navigation());
         map.zoomToExtent(bounds);
 
-        micro = new Microzonas();
-        micro.registerMap(map, 'microzonas:Microzonas_Amenaza_General', '/getmicrozone/');
+        map.events.register('click', map, function(e){
+            var params = {
+                REQUEST: "GetFeatureInfo",
+                EXCEPTIONS: "application/vnd.ogc.gml",
+                BBOX: map.getExtent().toBBOX(), //????
+                SERVICE: "WMS",
+                INFO_FORMAT: 'text/html',
+                QUERY_LAYERS: map.layers[0].params.LAYERS,
+                FEATURE_COUNT: 50,
+                Layers: 'microzonas:Microzonas_Amenaza_General', //'microzonas:Microzonas_Amenaza_General',
+                X: Math.round(e.xy.x),
+                Y: Math.round(e.xy.y),
+                WIDTH: map.size.w,
+                HEIGHT: map.size.h,
+                format: format,
+                styles: map.layers[0].params.STYLES,
+                srs: map.layers[0].params.SRS};
+
+            // merge filters
+            if(map.layers[0].params.CQL_FILTER != null) {
+                params.cql_filter = map.layers[0].params.CQL_FILTER;
+            }
+            if(map.layers[0].params.FILTER != null) {
+                params.filter = map.layers[0].params.FILTER;
+            }
+            if(map.layers[0].params.FEATUREID) {
+                params.featureid = map.layers[0].params.FEATUREID;
+            }
+
+            $.getJSON('/getmicrozone/', params, function(response){
+                //alert(response.responseText);
+
+                var name = response['name'];
+                var phi = response['phi'];
+                var beta = response['beta'];
+                var arg_a0 = response['arg_a0'];
+                var arg_ta = response['arg_ta'];
+                var arg_t0 = response['arg_t0'];
+                var arg_tstar = response['arg_tstar'];
+                var arg_td = response['arg_td'];
+                var arg_m = response['arg_m'];
+                var arg_p = response['arg_p'];
+
+                esp = new Espectro(name, phi, beta, arg_a0, arg_ta, arg_t0, arg_tstar, arg_td, arg_m, arg_p);
+                $( "#dialog" ).dialog( "open" );
+                window.mapping.graficarEspectro(esp);
+
+            });
+
+            e.stopPropagation();
+        });
     }
 }
