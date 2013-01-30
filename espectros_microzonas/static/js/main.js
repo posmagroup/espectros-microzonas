@@ -52,7 +52,7 @@ window.mapping = {
                         yaxis:{
                             //label: "Aceleración (s)"
                             tickOptions:{
-                                formatString:'$%.3f'
+                                formatString:'%.3f'
                             }
                         }
                     },
