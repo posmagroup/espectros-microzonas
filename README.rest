@@ -17,8 +17,8 @@ Instalación
     $ pip install -r requirements.pip
 
 El hecho de colocar el entorno virtual en la misma carpeta del
-proyecto es una preferencia personal, así como su nombre, así que no
-es una obligación. Si es conveniente colocar esta carpeta dentro de la
+proyecto es una preferencia personal, así como su nombre. Así que no
+es una obligación. Sí es conveniente colocar esta carpeta dentro de la
 lista del ``.gitignore``.
 
 Prueba
