@@ -21,4 +21,5 @@ requests==0.14.2
 sorl-thumbnail==11.09
 textile==2.1.5
 wsgiref==0.1.2
+git+http://github.com/funvisis/fvislib#egg=fvislib
 

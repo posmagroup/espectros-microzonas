@@ -16,7 +16,9 @@ import numpy
 
 from apps.microzonificacion.models import Microzone
 
-geoserver_url = 'http://localhost:8080/geoserver/microzonas/wms?'
+from funvisis import htmltable
+
+geoserver_url = settings.GEOSERVER_URL
 
 
 class LogSpace(JSONResponseMixin, TemplateView):
@@ -69,11 +71,11 @@ class MicrozoneDetail(JSONResponseMixin, DetailView):
         """
         try:
             response = requests.get(geoserver_url + urllib.urlencode(request.GET))
+            pqobj = pq(response.content)
+            tb = pqobj('table')
+            attribute = tb('td').next().next().html()
+            return attribute
         except Exception, e:
             print "error = %s" % e
 
-        pqobj = pq(response.content)
-        tb = pqobj('table')
-        attribute = tb('td').next().next().html()
 
-        return attribute
