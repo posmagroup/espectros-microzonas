@@ -1,7 +1,7 @@
 {% comment  %}
     Base Template based on HTML5 Boilerplate's code.
 {% endcomment %}
-
+{% load javascript_settings_tags %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -14,9 +14,11 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
+
         <link rel="stylesheet" href="{{ STATIC_URL }}css/start/jquery-ui-1.9.2.custom.css" />
         <link rel="stylesheet" href="{{ STATIC_URL }}css/stylesheet.css">
 
+        <script type="text/javascript">{% javascript_settings %}</script>
 
         {% block extrahead %}
             {% comment %}
