@@ -9,8 +9,7 @@
 // window.mapping namespace for the map-related functions.
 //
 
-server_ip = "190.73.8.234";
-geoserver_url = "http://"+ server_ip +":8080/geoserver/microzonas/wms";
+geoserver_url = configuration.microzonification.geoserver_url;
 
 window.mapping = {
     handler: function (e) {
