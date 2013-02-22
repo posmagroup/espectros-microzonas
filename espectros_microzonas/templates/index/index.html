@@ -7,6 +7,38 @@
         height: 450px;
         border: 1px solid black;
     }
+
+    .jqplot-target {
+        position: relative;
+        color: #fff;
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 18px;
+    }
+
+    .jqplot-axis {
+        font-size: 0.75em;
+    }
+
+    .jqplot-xaxis {
+        margin-top: 10px;
+    }
+
+    .jqplot-yaxis {
+        margin-right: 10px;
+    }
+
+    table.jqplot-cursor-tooltip {
+        border: 1px solid #cccccc;
+        font-size: 0.75em;
+    }
+
+    .jqplot-cursor-tooltip {
+        border: 1px solid #cccccc;
+        font-size: 0.75em;
+        white-space: nowrap;
+        background: rgba(0, 0, 0, 1);
+        padding: 1px;
+    }
 </style>
 {% endblock %}
 
@@ -14,30 +46,75 @@
 
 <script>
     $(document).ready(function(){
-        window.mapping.init();
-        //window.charts.plot_test();
-        /*showAttributes = function(response){
-            alert("hola " + response.responseText);
-            for (var key in response){
-                alert(key + ":" + response[key]);
-            }
-        };
+/*
+        $('body').css('text-align','center');
+        $('#map').css('width', '400px');
+        $('#map').css('margin-left', 'auto');
+        $('#map').css('margin-right', 'auto');*/
 
-        showAttributesError = function(response){
-            alert("error " + response.responseText);
-        };*/
+        window.mapping.init();
+
+        $(function() {
+            $( "#dialog" ).dialog({
+                autoOpen: false,
+                show:'scale',
+                hide:'scale',
+                width: 800,
+                height: 600
+            });
+        });
     });
+/*
+    //
+    var generateLogSpace = function(){
+        $.getJSON('/logspace/', {}, function(response){
+            return response;
+        });
+    };*/
 </script>
 {% endblock %}
 
 {% block content %}
+<!--
+<button id="opener">Click</button>
+-->
+
+<h1>Mapa de microzonas</h1>
+
+Haga click en una zona del mapa para visualizar la gráfica.<br><br>
+
 <div id="map"></div>
 <div id="wrapper">
     <div id="location"></div>
     <div id="scale">
     </div>
 </div>
+
+<div id="dialog" style="display: none">
+    <h3>Microzona: <span id="mzid"></span></h3>
+    <div id="attribute_table">
+        <table style="padding-left: 15px">
+            <tr>
+                <td>&phi;</td><td> = </td><td id="val_phi">0.324</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>&beta;</td><td> = </td><td id="val_beta">0.324</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>A<sub>0</sub></td><td> = </td><td id="val_a0">0.324</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>T<sub>A</sub></td><td> = </td><td id="val_ta">0.324</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>T<sub>0</sub></td><td> = </td><td id="val_t0">0.234</td>
+            </tr>
+            <tr>
+                <td>T<sup>*</sup></td><td> = </td><td id="val_tstar">0.324</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>T<sub>D</sub></td><td> = </td><td id="val_td">0.324</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>m</td><td> = </td><td id="val_m">0.324</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>p</td><td> = </td><td id="val_p">0.324</td><td colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+
+            </tr>
+        </table>
+    </div>
+    <h3>Gráfica del espectro elástico</h3>
+    <div id="chartdiv" style="height:300px;width:750px; "></div>
+</div>
 <!--<div id="attribute_table" style="display: none">-->
-<div id="chartdiv" style="height:400px;width:300px; "></div>
+
 
 {% endblock %}

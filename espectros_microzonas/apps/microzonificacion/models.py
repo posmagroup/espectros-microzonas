@@ -23,6 +23,7 @@ class Microzone(models.Model):
         arg_p: "p"
 
     """
+
     name = models.CharField(max_length=30)
     label = models.SlugField()
 
@@ -55,7 +56,6 @@ class Microzone(models.Model):
         Esta función es una implementación del modelo de ajuste que se
         presenta en la sección *"6.4.2 Modelo de ajuste de espectros"* del
         documento del proyecto de microzonificación.
-
         """
 
         phiA0 = phi * A_0

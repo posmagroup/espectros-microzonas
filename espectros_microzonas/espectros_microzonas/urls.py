@@ -3,7 +3,7 @@
 from django.conf.urls import patterns, include, url
 
 from apps.index.views import IndexView, SampleView
-from apps.microzonificacion.views import MicrozoneDetail
+from apps.microzonificacion.views import MicrozoneDetail, LogSpace
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -24,5 +24,6 @@ urlpatterns = patterns('',
     url(r'^plotsample$', SampleView.as_view() ),
     url(r'^json$', MicrozoneDetail.as_view()),
 
-    url(r'^getmicrozone/', MicrozoneDetail.as_view(), name='microzone')
+    url(r'^getmicrozone/', MicrozoneDetail.as_view(), name='microzone'),
+    url(r'^logspace/', LogSpace.as_view())
 )

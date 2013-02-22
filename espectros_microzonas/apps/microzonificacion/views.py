@@ -8,13 +8,25 @@ from django.template.defaultfilters import slugify
 from django.views.generic import DetailView, View
 
 from braces.views import JSONResponseMixin
+from django.views.generic.base import TemplateView
 from pyquery import PyQuery as pq
 
 import requests
+import numpy
+
 from apps.microzonificacion.models import Microzone
 
-geoserver_url = 'http://localhost:8080/geoserver/microzonas/wms?'
+from funvisis import htmltable
 
+geoserver_url = settings.GEOSERVER_URL
+
+
+class LogSpace(JSONResponseMixin, TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        arr = numpy.logspace(-6.5, 3.5, num=40, base=2)
+        print arr
+        return self.render_json_response(list(arr))
 
 class MicrozoneDetail(JSONResponseMixin, DetailView):
     """
@@ -33,6 +45,7 @@ class MicrozoneDetail(JSONResponseMixin, DetailView):
             obj = self.get_object(label=attr)
 
             context_dict = {
+                'name': attr,
                 'arg_a0': obj.arg_a0,
                 'phi': obj.phi,
                 'beta': obj.beta,
@@ -58,11 +71,11 @@ class MicrozoneDetail(JSONResponseMixin, DetailView):
         """
         try:
             response = requests.get(geoserver_url + urllib.urlencode(request.GET))
+            pqobj = pq(response.content)
+            tb = pqobj('table')
+            attribute = tb('td').next().next().html()
+            return attribute
         except Exception, e:
             print "error = %s" % e
 
-        pqobj = pq(response.content)
-        tb = pqobj('table')
-        attribute = tb('td').next().next().html()
 
-        return attribute
