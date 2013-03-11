@@ -9,7 +9,8 @@
 // window.mapping namespace for the map-related functions.
 //
 
-geoserver_url = configuration.microzonification.geoserver_url;
+var geoserver_url = configuration.microzonificacion.geoserver_url;
+var geoserver_microzone_layers = configuration.microzonificacion.geoserver_microzone_layers;
 
 window.mapping = {
     handler: function (e) {
@@ -100,10 +101,10 @@ window.mapping = {
 
         var map = new OpenLayers.Map('map', options);
 
-        var wms_3 = new OpenLayers.Layer.WMS( "Laderas",
+        var wms_3 = new OpenLayers.Layer.WMS( geoserver_microzone_layers[0][0],
                 geoserver_url,
                 {
-                    layers: 'microzonas:Microzonas_Laderas',
+                    layers: geoserver_microzone_layers[0][1],
                     format: "image/png",
                     transparent: "true"
                     //0x85C247,
@@ -111,10 +112,10 @@ window.mapping = {
                 {isBaseLayer: false});
 
 
-        var wms_2 = new OpenLayers.Layer.WMS( "Sedimentos",
+        var wms_2 = new OpenLayers.Layer.WMS( geoserver_microzone_layers[1][0],
                 geoserver_url,
                 {
-                    layers: 'microzonas:Microzonas_Sedimentos',
+                    layers: geoserver_microzone_layers[1][1],
                     format: "image/png",
                     style: "",
                     transparent: "true"
@@ -122,10 +123,10 @@ window.mapping = {
                 },
                 {isBaseLayer: false});
 
-        var wms_1 = new OpenLayers.Layer.WMS( "Amenaza General",
+        var wms_1 = new OpenLayers.Layer.WMS( geoserver_microzone_layers[2][0],
                 geoserver_url,
                 {
-                    layers: 'microzonas:Microzonas_Amenaza_General',
+                    layers: geoserver_microzone_layers[2][1],
                     format: "image/png",
                     transparent: "true"
                 },
@@ -139,15 +140,27 @@ window.mapping = {
         map.zoomToExtent(bounds);
 
         map.events.register('click', map, function(e){
+
+            var query_layers = map.layers.map(
+                function(element){
+                    return element.params.LAYERS;
+                }
+            ).join();
+            // As the WMS GetFeatureInfo specs tell about the QUERY_LAYERS GET
+            // parameter, it is a "Comma-separated list of one or more layers to
+            // be queried" - OpenGIS Web Map Service (WMS) Implementation
+            // Specification, page 38 -
+            // http://portal.opengeospatial.org/files/?artifact_id=14416
+
             var params = {
                 REQUEST: "GetFeatureInfo",
                 EXCEPTIONS: "application/vnd.ogc.gml",
                 BBOX: map.getExtent().toBBOX(), //????
                 SERVICE: "WMS",
                 INFO_FORMAT: 'text/html',
-                QUERY_LAYERS: map.layers[0].params.LAYERS,
+                QUERY_LAYERS: query_layers,
                 FEATURE_COUNT: 50,
-                Layers: 'microzonas:Microzonas_Amenaza_General', //'microzonas:Microzonas_Amenaza_General',
+                Layers: query_layers,
                 X: Math.round(e.xy.x),
                 Y: Math.round(e.xy.y),
                 WIDTH: map.size.w,
