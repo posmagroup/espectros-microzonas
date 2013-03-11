@@ -70,7 +70,8 @@ class MicrozoneDetail(JSONResponseMixin, DetailView):
 
         """
         try:
-            response = requests.get(geoserver_url + urllib.urlencode(request.GET))
+            url_request = geoserver_url + "?" + urllib.urlencode(request.GET)
+            response = requests.get(url_request)
             pqobj = pq(response.content)
             tb = pqobj('table')
             attribute = tb('td').next().next().html()
