@@ -53,5 +53,25 @@ apreciar el proyecto desde el punto de vista del usuario.
 Pre-requisitos
 ===============
 
-Debe existir una instancia de geoserver corriendo en un servidor. El URL
-de esta instancia debe ser configurado en ``settings.GEOSERVER_URL``.
+Debe existir una instancia de GeoServer corriendo en un servidor. Para
+identificar esta instancia, deben establecerse dos valores de configuración:
+
+* GEOSERVER_URL que representa la URL con la que el proyecto Django identifica
+  a la instancia de GeoServer.
+* GEOSERVER_URL_CLIENT que representa la URL con la que el código cliente (JS)
+  identifica a la instancia de GeoServer (es necesario porque puede que sean
+  URLs diferentes a pesar de referirse al mismo servidor).
+
+Adicionalmente, debe establecerse el valor de la configuración
+``settings.GEOSERVER_MICROZONE_LAYERS`` como una lista de tuplas de dos cadenas.
+Cada tupla representa una capa de microzonas y se compone de una primera cadena
+que simplemente le da un nombre amigable al usuario y la segunda cadena es el
+nombre formal de la capa tal cual está establecida en GeoServer.
+
+Ejemplo::
+
+    GEOSERVER_URL = "http://localhost:8080/geoserver/Micronozas/wms"
+    GEOSERVER_URL_CLIENT = "http://localhost:8080/geoserver/Micronozas/wms"
+    GEOSERVER_MICROZONE_LAYERS = [('Laderas', 'Micronozas:Microzonas_Laderas'),
+                              ('Sedimentos', 'Micronozas:Microzonas_Sedimentos'),
+                              ('Amenaza General', 'Micronozas:Microzonas_Amenaza_General'),]
