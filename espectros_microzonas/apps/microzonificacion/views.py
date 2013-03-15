@@ -1,32 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Create your views here.
-import urllib
-from django.conf import settings
-from django.http import HttpResponse, Http404
-from django.template.defaultfilters import slugify
-from django.views.generic import DetailView, View
-
+from django.http import  Http404
+from django.views.generic import DetailView
 from braces.views import JSONResponseMixin
-from django.views.generic.base import TemplateView
-from pyquery import PyQuery as pq
-
-import requests
-import numpy
-
 from apps.microzonificacion.models import Microzone
-
-from funvisis import htmltable
-
-geoserver_url = settings.GEOSERVER_URL
-
-
-class LogSpace(JSONResponseMixin, TemplateView):
-
-    def get(self, request, *args, **kwargs):
-        arr = numpy.logspace(-6.5, 3.5, num=40, base=2)
-        print arr
-        return self.render_json_response(list(arr))
 
 class MicrozoneDetail(JSONResponseMixin, DetailView):
     """
@@ -34,14 +11,12 @@ class MicrozoneDetail(JSONResponseMixin, DetailView):
 
     """
 
-    #model = MicrozoneModel
-
     def get_object(self, **kwargs):
         return Microzone.objects.get(label__iexact=kwargs['label'])
 
     def get(self, request, *args, **kwargs):
         try:
-            attr = self.get_microzone_id(request)
+            attr = request.GET['name']
             obj = self.get_object(label=attr)
 
             context_dict = {
@@ -61,22 +36,3 @@ class MicrozoneDetail(JSONResponseMixin, DetailView):
         except Exception, e:
             print "error = %" % e
             raise Http404
-            #return HttpResponse()
-
-    def get_microzone_id(self, request):
-        """
-        Redirects the get request to GeoServer.
-        The GEOSERVER_URL setting must be declared in settings. Defaults to localhost.
-
-        """
-        try:
-            url_request = geoserver_url + "?" + urllib.urlencode(request.GET)
-            response = requests.get(url_request)
-            pqobj = pq(response.content)
-            tb = pqobj('table')
-            attribute = tb('td').next().next().html()
-            return attribute
-        except Exception, e:
-            print "error = %s" % e
-
-
