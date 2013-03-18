@@ -63,15 +63,19 @@ identificar esta instancia, deben establecerse dos valores de configuración:
   URLs diferentes a pesar de referirse al mismo servidor).
 
 Adicionalmente, debe establecerse el valor de la configuración
-``settings.GEOSERVER_MICROZONE_LAYERS`` como una lista de tuplas de dos cadenas.
+``settings.GEOSERVER_MICROZONE_LAYERS`` como una lista de tuplas de tres cadenas.
 Cada tupla representa una capa de microzonas y se compone de una primera cadena
-que simplemente le da un nombre amigable al usuario y la segunda cadena es el
-nombre formal de la capa tal cual está establecida en GeoServer.
+que simplemente le da un nombre amigable al usuario, la segunda cadena es el
+nombre formal de la capa tal cual está establecida en GeoServer y la tercera
+cadena es el nombre del *atributo interesante* de la capa.
 
 Ejemplo::
 
     GEOSERVER_URL = "http://localhost:8080/geoserver/Micronozas/wms"
     GEOSERVER_URL_CLIENT = "http://localhost:8080/geoserver/Micronozas/wms"
-    GEOSERVER_MICROZONE_LAYERS = [('Laderas', 'Micronozas:Microzonas_Laderas'),
-                              ('Sedimentos', 'Micronozas:Microzonas_Sedimentos'),
-                              ('Amenaza General', 'Micronozas:Microzonas_Amenaza_General'),]
+    GEOSERVER_MICROZONE_LAYERS = [('Laderas', 'Microzonas:Microzonas_Laderas', 'Amenaza'),
+                              ('Sedimentos', 'Microzonas:Microzonas_Sedimentos', 'microzona'),
+                              ('Amenaza General', 'Microzonas:Microzonas_Amenaza_General', 'Microzonas'),]
+
+El *atributo interesante* es aquel que tiene como valor el nombre de la microzona
+tal cual aparece en la base de datos de atributos.

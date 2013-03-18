@@ -750,5 +750,37 @@
             "arg_td": 1.8, 
             "arg_p": 0.8
         }
+    },
+    {
+        "pk": 48, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.65, 
+            "arg_t0": 0.18, 
+            "phi": 1.4, 
+            "arg_m": 0.12, 
+            "arg_a0": 0.3, 
+            "label": "RM1-2", 
+            "arg_ta": 0.02, 
+            "beta": 2.3, 
+            "arg_td": 1.9, 
+            "arg_p": 1.35
+        }
+    }, 
+    {
+        "pk": 49, 
+        "model": "microzonificacion.microzone", 
+        "fields": {
+            "arg_tstar": 0.65, 
+            "arg_t0": 0.2, 
+            "phi": 1.4, 
+            "arg_m": 0.05, 
+            "arg_a0": 0.265, 
+            "label": "RM2-2", 
+            "arg_ta": 0.02, 
+            "beta": 2.6, 
+            "arg_td": 1.85, 
+            "arg_p": 1.25
+        }
     }
 ]
