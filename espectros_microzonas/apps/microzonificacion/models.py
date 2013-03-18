@@ -1,4 +1,4 @@
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from django.db import models
 
@@ -39,40 +39,4 @@ class Microzone(models.Model):
 
     def __unicode__(self):
         return "%s" % self.arg_t0
-        # return "%s" % self.name
 
-    def m_espectro(self, T):
-        return self.get_espectro(T,
-                        A_0=self.arg_a0, phi=self.phi, beta=self.beta,
-                        T_A=self.arg_ta, T_0=self.arg_t0,
-                        T_star=self.arg_tstar, T_D=self.arg_td,
-                        m=self.arg_m, p=self.arg_p)
-
-    def get_espectro(self, T, A_0, phi, beta, T_A, T_0, T_star, T_D, m, p):
-        """
-        Espectros elásticos. Modelo de ajuste. Proyecto de
-        microzonificación sísmica - Caracas
-
-        Esta función es una implementación del modelo de ajuste que se
-        presenta en la sección *"6.4.2 Modelo de ajuste de espectros"* del
-        documento del proyecto de microzonificación.
-        """
-
-        phiA0 = phi * A_0
-        if T < T_A:
-            return phiA0
-        elif T_A <= T < T_0:
-            trans = 1 + (T - T_A) / (T_0 - T_A) / (T_0 - T_A) * (beta - 1)
-            return phiA0 * trans
-        else:
-            hyp_fall_m = (T_0 / T) ** m
-            phibetaA0 = beta * phiA0
-            if T_0 <= T < T_star:
-                return phibetaA0 * hyp_fall_m
-            else:
-                hyp_fall_p = (T_star / T) ** p
-                if T_star <= T < T_D:
-                    return phibetaA0 * hyp_fall_m * hyp_fall_p
-                else:   # T >= T_D
-                    pseudo_accel_2 = (T_D / T) ** 2
-                    return phibetaA0 * hyp_fall_m * hyp_fall_p * pseudo_accel_2
