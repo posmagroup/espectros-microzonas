@@ -11,7 +11,8 @@
 
 var geoserver_url = configuration.microzonificacion.geoserver_url;
 var geoserver_microzone_layers = configuration.microzonificacion.geoserver_microzone_layers;
-
+var microzone_value;
+var microzone_
 window.mapping = {
     handler: function (e) {
 
@@ -157,7 +158,7 @@ window.mapping = {
                 EXCEPTIONS: "application/vnd.ogc.gml",
                 BBOX: map.getExtent().toBBOX(), //????
                 SERVICE: "WMS",
-                INFO_FORMAT: 'text/html',
+                INFO_FORMAT: 'application/json',
                 QUERY_LAYERS: query_layers,
                 FEATURE_COUNT: 50,
                 Layers: query_layers,
@@ -180,24 +181,35 @@ window.mapping = {
                 params.featureid = map.layers[0].params.FEATUREID;
             }
 
-            $.getJSON('/getmicrozone/', params, function(response){
-                //alert(response.responseText);
-
-                var name = response['name'];
-                var phi = response['phi'];
-                var beta = response['beta'];
-                var arg_a0 = response['arg_a0'];
-                var arg_ta = response['arg_ta'];
-                var arg_t0 = response['arg_t0'];
-                var arg_tstar = response['arg_tstar'];
-                var arg_td = response['arg_td'];
-                var arg_m = response['arg_m'];
-                var arg_p = response['arg_p'];
-
-                esp = new Espectro(name, phi, beta, arg_a0, arg_ta, arg_t0, arg_tstar, arg_td, arg_m, arg_p);
-                $( "#dialog" ).dialog( "open" );
-                window.mapping.graficarEspectro(esp);
-
+            $.getJSON(geoserver_url, params, function(response){
+                microzone_ = response.features[0]; // Expo for debugging
+                var microzone_name = response.features[0].id.split('.')[0];
+                
+                var field_name;
+                for(var i = 0; i < geoserver_microzone_layers.length; i++){
+                    if(geoserver_microzone_layers[i][1].indexOf(microzone_name) !== -1){
+                        field_name = geoserver_microzone_layers[i][2];
+                        break;
+                    }
+                }
+                microzone_value = response.features[0].properties[field_name];
+                
+                $.getJSON("/getmicrozone/", {name: microzone_value}, function(response){
+                
+                    var name = response['name'];
+                    var phi = response['phi'];
+                    var beta = response['beta'];
+                    var arg_a0 = response['arg_a0'];
+                    var arg_ta = response['arg_ta'];
+                    var arg_t0 = response['arg_t0'];
+                    var arg_tstar = response['arg_tstar'];
+                    var arg_td = response['arg_td'];
+                    var arg_m = response['arg_m'];
+                    var arg_p = response['arg_p'];
+                    esp = new Espectro(name, phi, beta, arg_a0, arg_ta, arg_t0, arg_tstar, arg_td, arg_m, arg_p);
+                    $( "#dialog" ).dialog( "open" );
+                    window.mapping.graficarEspectro(esp);
+                });
             });
 
             e.stopPropagation();
