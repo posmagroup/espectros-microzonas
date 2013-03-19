@@ -69,6 +69,11 @@ que simplemente le da un nombre amigable al usuario, la segunda cadena es el
 nombre formal de la capa tal cual está establecida en GeoServer y la tercera
 cadena es el nombre del *atributo interesante* de la capa.
 
+También debe existir un servidor de parámetros. El servidor definirá un servicio
+para obtener los parámetros de una microzona por nombre de la microzona. Este
+servicio debe tener una URL, y esta URL se establecerá en la configuración
+PARAMETERS_SERVICE.
+
 Ejemplo::
 
     GEOSERVER_URL = "http://localhost:8080/geoserver/Micronozas/wms"
@@ -76,6 +81,7 @@ Ejemplo::
     GEOSERVER_MICROZONE_LAYERS = [('Laderas', 'Microzonas:Microzonas_Laderas', 'Amenaza'),
                               ('Sedimentos', 'Microzonas:Microzonas_Sedimentos', 'microzona'),
                               ('Amenaza General', 'Microzonas:Microzonas_Amenaza_General', 'Microzonas'),]
+    PARAMETERS_SERVICE = "http://localhost:8000/getmicrozone/"
 
 El *atributo interesante* es aquel que tiene como valor el nombre de la microzona
 tal cual aparece en la base de datos de atributos.
