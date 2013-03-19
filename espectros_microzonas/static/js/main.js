@@ -12,7 +12,21 @@
 var geoserver_url = configuration.microzonificacion.geoserver_url;
 var geoserver_microzone_layers = configuration.microzonificacion.geoserver_microzone_layers;
 var microzone_value;
-var microzone_
+var microzone_;
+
+function set_default_microzone_value(primitive_value){
+// Custom rules. This function is a hook between the process of obtaining the
+// microzone value from the WMS/WFS server and the process of consulting the
+// parameters database.
+
+    var default_T = '-T0';
+    var derivate_value = primitive_value;
+    if(primitive_value[0] == 'R'){
+        derivate_value += default_T;
+    }
+    return derivate_value;
+}
+
 window.mapping = {
     handler: function (e) {
 
@@ -192,9 +206,10 @@ window.mapping = {
                         break;
                     }
                 }
-                microzone_value = response.features[0].properties[field_name];
-                
-                $.getJSON("/getmicrozone/", {name: microzone_value}, function(response){
+                microzone_value = set_default_microzone_value(response.features[0].properties[field_name]);
+                var parameters_service = configuration.microzonificacion.parameters_service;
+                                
+                $.getJSON(parameters_service, {name: microzone_value}, function(response){
                 
                     var name = response['name'];
                     var phi = response['phi'];
