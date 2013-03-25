@@ -18,7 +18,6 @@ class MicrozoneDetail(JSONResponseMixin, DetailView):
         try:
             attr = request.GET['name']
             obj = self.get_object(label=attr)
-
             context_dict = {
                 'name': attr,
                 'arg_a0': obj.arg_a0,
@@ -31,8 +30,7 @@ class MicrozoneDetail(JSONResponseMixin, DetailView):
                 'arg_m': obj.arg_m,
                 'arg_p': obj.arg_p
             }
-
             return self.render_json_response(context_dict)
         except Exception, e:
-            print "error = %" % e
+            print "error = %s" % e
             raise Http404

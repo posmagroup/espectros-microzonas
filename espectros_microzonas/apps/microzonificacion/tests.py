@@ -21,7 +21,7 @@ class GetMicrozoneTest(TestCase):
         self.factory = RequestFactory()
 
         url_requests_ids_mapping = [
-            ( ,),
+            #( ,),
         ]
         
     def test_known_results(self):

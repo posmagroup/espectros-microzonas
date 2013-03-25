@@ -40,11 +40,6 @@ Espectro.prototype.calcular = function(T){
 
 Espectro.prototype.obtenerPuntos = function(divname){
 
-/*    var f_t0 = this.calcular(this.T_0);
-    var f_ta = this.calcular(this.T_A);
-    var f_tstar = this.calcular(this.T_star);
-    var f_td = this.calcular(this.T_D);*/
-
     var logspace = this.logSpace();
     var points = [];
 
