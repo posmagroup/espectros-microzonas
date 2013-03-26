@@ -17,6 +17,12 @@ var microzone_;
 */
 
 var microzonelib = (function(){
+
+    /**
+     * Private atributes and methods of the microzonelib object
+     */
+    var current_microzone = "";
+
     var config = {
         geoserver_url : 'http://192.168.0.102:8080/geoserver/Microzonas/wms',
         parameters_service : '/getmicrozone/',
@@ -30,17 +36,36 @@ var microzonelib = (function(){
         chartdiv : 'chartdiv'
     };
 
-    var set_default_microzone_value = function(primitive_value){
-        var default_T = '-T0';
-        var derivate_value = primitive_value;
-        if(primitive_value[0] == 'R'){
-            derivate_value += default_T;
+    var get_full_microzone_id = function(slope_value){
+        slope_value = (slope_value)? slope_value : 'T0';
+
+        if(current_microzone[0] == 'R'){
+            return current_microzone + '-' + slope_value;
+        }else{
+            return current_microzone;
         }
-        return derivate_value;
+
     };
 
-    var request_zone_attributes = function(parameters_service, microzone_value){
-        $.getJSON(parameters_service, {name: microzone_value}, function(response){
+    var map_click_handler = function(response){
+
+        //microzone_ = response.features[0]; // Expo for debugging
+        var microzone_name = response.features[0].id.split('.')[0];
+
+        var field_name;
+        for(var i = 0; i < config.microzone_layers.length; i++){
+            if(config.microzone_layers[i][1].indexOf(microzone_name) !== -1){
+                field_name = config.microzone_layers[i][2];
+                break;
+            }
+        }
+        current_microzone = response.features[0].properties[field_name];    //updates global zone id
+        var microzone_id = get_full_microzone_id();  // uses default slope (T0)
+        request_zone_attributes(microzone_id);  // requests the microzone attributes
+    }
+
+    var request_zone_attributes = function(microzone_id){
+        $.getJSON(config.parameters_service, {name: microzone_id}, function(response){
 
             var name = response['name'];
             var phi = response['phi'];
@@ -106,6 +131,10 @@ var microzonelib = (function(){
         );
     };
 
+
+    /**
+     * Public methods of the microzonelib object
+     */
     return {
         init : function(new_config){
             config = (new_config)? new_config: config;
@@ -207,26 +236,15 @@ var microzonelib = (function(){
                     params.featureid = map.layers[0].params.FEATUREID;
                 }
 
-                $.getJSON(config.geoserver_url, params, function(response){
-
-                    //microzone_ = response.features[0]; // Expo for debugging
-                    var microzone_name = response.features[0].id.split('.')[0];
-
-                    var field_name;
-                    for(var i = 0; i < config.microzone_layers.length; i++){
-                        if(config.microzone_layers[i][1].indexOf(microzone_name) !== -1){
-                            field_name = config.microzone_layers[i][2];
-                            break;
-                        }
-                    }
-                    var microzone_value = set_default_microzone_value(response.features[0].properties[field_name]);
-                    var parameters_service = config.parameters_service;
-
-                    request_zone_attributes(parameters_service, microzone_value);
-
-                });
+                $.getJSON(config.geoserver_url, params, map_click_handler);
 
                 e.stopPropagation();
+            });
+
+            //slope selection onChange event
+            $('#slope_select').change(function(){
+                var selected_slope = $('#slope_select option:selected').val();
+                request_zone_attributes(get_full_microzone_id(selected_slope));
             });
         }
     };
