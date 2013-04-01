@@ -56,14 +56,11 @@ Pre-requisitos
 Debe existir una instancia de GeoServer corriendo en un servidor. Para
 identificar esta instancia, deben establecerse dos valores de configuración:
 
-* GEOSERVER_URL que representa la URL con la que el proyecto Django identifica
+* GEOSERVER_URL que representa la URL con la que el proyecto identifica
   a la instancia de GeoServer.
-* GEOSERVER_URL_CLIENT que representa la URL con la que el código cliente (JS)
-  identifica a la instancia de GeoServer (es necesario porque puede que sean
-  URLs diferentes a pesar de referirse al mismo servidor).
 
 Adicionalmente, debe establecerse el valor de la configuración
-``settings.GEOSERVER_MICROZONE_LAYERS`` como una lista de tuplas de tres cadenas.
+``settings.MICROZONE_LAYERS`` como una lista de tuplas de tres cadenas.
 Cada tupla representa una capa de microzonas y se compone de una primera cadena
 que simplemente le da un nombre amigable al usuario, la segunda cadena es el
 nombre formal de la capa tal cual está establecida en GeoServer y la tercera
@@ -77,11 +74,35 @@ PARAMETERS_SERVICE.
 Ejemplo::
 
     GEOSERVER_URL = "http://localhost:8080/geoserver/Micronozas/wms"
-    GEOSERVER_URL_CLIENT = "http://localhost:8080/geoserver/Micronozas/wms"
-    GEOSERVER_MICROZONE_LAYERS = [('Laderas', 'Microzonas:Microzonas_Laderas', 'Amenaza'),
+    MICROZONE_LAYERS = [('Laderas', 'Microzonas:Microzonas_Laderas', 'Amenaza'),
                               ('Sedimentos', 'Microzonas:Microzonas_Sedimentos', 'microzona'),
                               ('Amenaza General', 'Microzonas:Microzonas_Amenaza_General', 'Microzonas'),]
     PARAMETERS_SERVICE = "http://localhost:8000/getmicrozone/"
 
 El *atributo interesante* es aquel que tiene como valor el nombre de la microzona
 tal cual aparece en la base de datos de atributos.
+
+Bibliotecas Javascript
+======================
+
+Se incluyen en el proyecto dos archivos .js: "spectrum.js" y "microzonelib.js". En "spectrum.js" 
+se define la clase Spectrum, que corresponde al cálculo de la función de espectro de una microzona.
+
+La clase debe instanciarse con los atributos principales de la microzona y su nombre::
+
+	var esp = new Spectrum(label, phi, beta, arg_a0, arg_ta, arg_t0, arg_tstar, arg_td, arg_m, arg_p);
+	
+Entonces puede procederse al cálculo de la función de espectro para cualquier punto, mediante la función "calculate"::
+
+	var y_point = esp.calculate(x_point);
+	
+Cualquier objeto de la clase Spectrum, una vez instanciado, puede generar calcular una serie de puntos 
+mediante la función "getPoints()". Este cálculo se basa en una serie de puntos pre-calculados como
+equidistantes en el eje x en escala logarítmica::
+
+	var points = esp.getPoints();
+	
+El archivo "microzonelib.js" crea un objeto global llamado ``microzonelib``, el cual debe inicializarse
+con el método init(), recibiendo opcionalmente un grupo de opciones iniciales.
+	
+	
