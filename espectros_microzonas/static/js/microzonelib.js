@@ -48,7 +48,7 @@ var microzonelib = (function(){
     }
 
     var request_zone_attributes = function(microzone_id){
-        $.getJSON(config.parameters_service, {name: microzone_id}, function(response){
+        $.getJSON(config.parameters_service, {label: microzone_id}, function(response){
 
             var label = response['label'];
             var phi = response['phi'];
