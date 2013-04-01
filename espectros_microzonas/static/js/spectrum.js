@@ -18,7 +18,7 @@ var Spectrum = function(label, phi, beta, A_0, T_A, T_0, T_star, T_D, m, p){
     return this;
 }
 
-Spectrum.prototype.calcular = function(T){
+Spectrum.prototype.calculate = function(T){
     if(T < this.T_A){
         return this.phi * this.A_0;
     }
@@ -38,13 +38,13 @@ Spectrum.prototype.calcular = function(T){
     return false; // error
 };
 
-Spectrum.prototype.obtenerPuntos = function(divname){
+Spectrum.prototype.getPoints = function(){
 
     var logspace = this.logSpace();
     var points = [];
 
     for(var i = 0; i < logspace.length; i++){
-        var point = [logspace[i], this.calcular(logspace[i])];
+        var point = [logspace[i], this.calculate(logspace[i])];
         points.push(point);
     }
 

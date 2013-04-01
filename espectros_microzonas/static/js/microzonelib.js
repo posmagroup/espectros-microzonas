@@ -146,7 +146,7 @@ var microzonelib = (function(){
         $("#val_td").html(espectro.T_D);
         $("#val_tstar").html(espectro.T_star);
 
-        var points = espectro.obtenerPuntos();
+        var points = espectro.getPoints();
 
         $.jqplot(config.chartdiv,  [points],
                 {
@@ -244,6 +244,10 @@ var microzonelib = (function(){
                 var selected_slope = $('#slope_select option:selected').val();
                 request_zone_attributes(get_full_microzone_id(selected_slope));
             });
-        }
+        },
+
+        plot: plot_spectrum,
+        request_zone: request_zone_attributes
+
     };
 })();
