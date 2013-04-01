@@ -3,8 +3,8 @@
  *
  * */
 
-var Espectro = function(name, phi, beta, A_0, T_A, T_0, T_star, T_D, m, p){
-    this.name = name;
+var Spectrum = function(label, phi, beta, A_0, T_A, T_0, T_star, T_D, m, p){
+    this.label = label;
     this.A_0 = A_0;
     this.phi = phi;
     this.beta = beta;
@@ -18,7 +18,7 @@ var Espectro = function(name, phi, beta, A_0, T_A, T_0, T_star, T_D, m, p){
     return this;
 }
 
-Espectro.prototype.calcular = function(T){
+Spectrum.prototype.calcular = function(T){
     if(T < this.T_A){
         return this.phi * this.A_0;
     }
@@ -38,7 +38,7 @@ Espectro.prototype.calcular = function(T){
     return false; // error
 };
 
-Espectro.prototype.obtenerPuntos = function(divname){
+Spectrum.prototype.obtenerPuntos = function(divname){
 
     var logspace = this.logSpace();
     var points = [];
@@ -51,7 +51,7 @@ Espectro.prototype.obtenerPuntos = function(divname){
     return points;
 };
 
-Espectro.prototype.logSpace = function(){
+Spectrum.prototype.logSpace = function(){
     return [
         1.10485435e-02, 1.31975163e-02, 1.57644704e-02, 1.88307043e-02, 2.24933293e-02, 2.68683452e-02, 3.20943141e-02,
         3.83367486e-02, 4.57933542e-02, 5.47002906e-02, 6.53396512e-02, 7.80483975e-02, 9.32290307e-02, 1.11362340e-01,

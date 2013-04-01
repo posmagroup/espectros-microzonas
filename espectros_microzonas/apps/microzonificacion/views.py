@@ -16,10 +16,11 @@ class MicrozoneDetail(JSONResponseMixin, DetailView):
 
     def get(self, request, *args, **kwargs):
         try:
-            attr = request.GET['name']
+            attr = request.GET['label']
             obj = self.get_object(label=attr)
             context_dict = {
-                'name': attr,
+                'label': attr,
+                'name': obj.name,
                 'arg_a0': obj.arg_a0,
                 'phi': obj.phi,
                 'beta': obj.beta,
