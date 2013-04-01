@@ -19,6 +19,10 @@ var microzonelib = (function(){
         chartdiv : 'chartdiv'
     };
 
+    var set_conf = function(newconf){
+        config = (newconf)? newconf : config;
+    };
+
     var display_map = function(mapdiv){
         var div_id = (mapdiv)? mapdiv : config.map_div;
 
@@ -179,6 +183,8 @@ var microzonelib = (function(){
                     }
                 }
         );
+
+        return points;
     };
 
 
@@ -187,9 +193,17 @@ var microzonelib = (function(){
      */
     return {
         init : function(new_config){
-            config = (new_config)? new_config: config;
+            set_conf(new_config);
 
             var map = display_map();
+
+            $( "#" + config.dialog_div ).dialog({
+                autoOpen: false,
+                show:'scale',
+                hide:'scale',
+                width: 800,
+                height: 600
+            });
 
             map.events.register('click', map, function(e){
 
@@ -246,8 +260,10 @@ var microzonelib = (function(){
             });
         },
 
-        plot: plot_spectrum,
-        request_zone: request_zone_attributes
+        set_config: set_conf,                   //set_config({option1: '', option2: 3})
+        plot: plot_spectrum,                    //plot(new Spectrum('R', 1.32, 132,...))
+        request_zone: request_zone_attributes,  //request_zone('R2-T1')
+        show_map: display_map                   //show_map('map_div')
 
     };
 })();

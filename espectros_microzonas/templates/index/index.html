@@ -46,33 +46,14 @@
 
 <script>
     $(document).ready(function(){
-
         microzonelib.init();
-
-        $(function() {
-            $( "#dialog" ).dialog({
-                autoOpen: false,
-                show:'scale',
-                hide:'scale',
-                width: 800,
-                height: 600
-            });
-        });
     });
-/*
-    //
-    var generateLogSpace = function(){
-        $.getJSON('/logspace/', {}, function(response){
-            return response;
-        });
-    };*/
+
 </script>
 {% endblock %}
 
 {% block content %}
-<!--
-<button id="opener">Click</button>
--->
+
 
 <h1>Mapa de microzonas</h1>
 
@@ -117,7 +98,6 @@ Haga click en una zona del mapa para visualizar la gráfica.<br><br>
     <h3>Gráfica del espectro elástico</h3>
     <div id="chartdiv" style="height:300px;width:750px; "></div>
 </div>
-<!--<div id="attribute_table" style="display: none">-->
 
 
 {% endblock %}
