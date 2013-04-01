@@ -19,6 +19,67 @@ var microzonelib = (function(){
         chartdiv : 'chartdiv'
     };
 
+    var display_map = function(mapdiv){
+        var div_id = (mapdiv)? mapdiv : config.map_div;
+
+        OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
+        format = 'image/png';
+
+        var bounds = new OpenLayers.Bounds(
+                701278.4525937159, 1143737.188069312,
+                752974.5281932829, 1169040.7596747405
+        );
+
+        var options = {
+            controls: [],
+            maxExtent: bounds,
+            maxResolution: 201.93779531080872,
+            projection: "EPSG:2202",
+            units: 'm'
+        };
+
+        var map = new OpenLayers.Map(div_id, options);
+
+        var wms_3 = new OpenLayers.Layer.WMS( config.microzone_layers[0][0],
+                config.geoserver_url,
+                {
+                    layers: config.microzone_layers[0][1],
+                    format: "image/png",
+                    transparent: "true"
+                    //0x85C247,
+                },
+                {isBaseLayer: false});
+
+        var wms_2 = new OpenLayers.Layer.WMS( config.microzone_layers[1][0],
+                config.geoserver_url,
+                {
+                    layers: config.microzone_layers[1][1],
+                    format: "image/png",
+                    style: "",
+                    transparent: "true"
+                    // 0x886744
+                },
+                {isBaseLayer: false});
+
+        var wms_1 = new OpenLayers.Layer.WMS( config.microzone_layers[2][0],
+                config.geoserver_url,
+                {
+                    layers: config.microzone_layers[2][1],
+                    format: "image/png",
+                    transparent: "true"
+                },
+                {isBaseLayer: true}
+        );
+
+        map.addLayers([wms_1, wms_2, wms_3]);
+
+        map.addControl(new OpenLayers.Control.LayerSwitcher());
+        map.addControl(new OpenLayers.Control.Navigation());
+        map.zoomToExtent(bounds);
+
+        return map;
+    };
+
     var get_full_microzone_id = function(slope_value){
         slope_value = (slope_value)? slope_value : 'T0';
 
@@ -60,6 +121,12 @@ var microzonelib = (function(){
             var arg_td = response['arg_td'];
             var arg_m = response['arg_m'];
             var arg_p = response['arg_p'];
+
+            if(current_microzone[0] == 'R'){
+                $('#slope_div').show();
+            }else{
+                $('#slope_div').hide();
+            }
 
             esp = new Spectrum(label, phi, beta, arg_a0, arg_ta, arg_t0, arg_tstar, arg_td, arg_m, arg_p);
             $( "#"+config.dialog_div ).dialog( "open" );
@@ -122,61 +189,7 @@ var microzonelib = (function(){
         init : function(new_config){
             config = (new_config)? new_config: config;
 
-            //OpenLayers.ProxyHost="/proxyhost?url=";
-            OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
-            format = 'image/png';
-
-            var bounds = new OpenLayers.Bounds(
-                    701278.4525937159, 1143737.188069312,
-                    752974.5281932829, 1169040.7596747405
-            );
-
-            var options = {
-                controls: [],
-                maxExtent: bounds,
-                maxResolution: 201.93779531080872,
-                projection: "EPSG:2202",
-                units: 'm'
-            };
-
-            var map = new OpenLayers.Map(config.map_div, options);
-
-            var wms_3 = new OpenLayers.Layer.WMS( config.microzone_layers[0][0],
-                    config.geoserver_url,
-                    {
-                        layers: config.microzone_layers[0][1],
-                        format: "image/png",
-                        transparent: "true"
-                        //0x85C247,
-                    },
-                    {isBaseLayer: false});
-
-            var wms_2 = new OpenLayers.Layer.WMS( config.microzone_layers[1][0],
-                    config.geoserver_url,
-                    {
-                        layers: config.microzone_layers[1][1],
-                        format: "image/png",
-                        style: "",
-                        transparent: "true"
-                        // 0x886744
-                    },
-                    {isBaseLayer: false});
-
-            var wms_1 = new OpenLayers.Layer.WMS( config.microzone_layers[2][0],
-                    config.geoserver_url,
-                    {
-                        layers: config.microzone_layers[2][1],
-                        format: "image/png",
-                        transparent: "true"
-                    },
-                    {isBaseLayer: true}
-            );
-
-            map.addLayers([wms_1, wms_2, wms_3]);
-
-            map.addControl(new OpenLayers.Control.LayerSwitcher());
-            map.addControl(new OpenLayers.Control.Navigation());
-            map.zoomToExtent(bounds);
+            var map = display_map();
 
             map.events.register('click', map, function(e){
 
