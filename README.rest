@@ -54,9 +54,9 @@ Pre-requisitos
 ===============
 
 Debe existir una instancia de GeoServer corriendo en un servidor. Para
-identificar esta instancia, deben establecerse dos valores de configuración:
+identificar esta instancia, deben establecerse el siguiente valor de configuración:
 
-* GEOSERVER_URL que representa la URL con la que el proyecto identifica
+* GEOSERVER_URL: que representa la URL con la que el proyecto identifica
   a la instancia de GeoServer.
 
 Adicionalmente, debe establecerse el valor de la configuración
@@ -87,28 +87,27 @@ Bibliotecas Javascript
 
 Se incluyen en el proyecto dos archivos .js: "spectrum.js" y "microzonelib.js". 
 
-Una vez incluidos los archivos .js en la cabecera del html principal, éste debe definir los ``div`` "map" y "dialog"
-como se muestran en index.html.
-
+Una vez incluidos los archivos en la cabecera del html principal, éste debe definir los ``<div>`` con identificadores "map" y "dialog" respectivamente,
+justo como se muestran en index.html.
 
 En "spectrum.js" se define la clase Spectrum, que corresponde al cálculo de la función de espectro de una microzona.
 
-La clase debe instanciarse con los atributos principales de la microzona y su nombre::
+La clase debe instanciarse con los atributos principales de la microzona y su nombre (label)::
 
 	var esp = new Spectrum(label, phi, beta, arg_a0, arg_ta, arg_t0, arg_tstar, arg_td, arg_m, arg_p);
 	
-Entonces puede procederse al cálculo de la función de espectro para cualquier punto, mediante la función "calculate"::
+Entonces puede procederse al cálculo de la función de espectro para cualquier punto x, mediante la función "calculate"::
 
 	var y_point = esp.calculate(x_point);
 	
-Cualquier objeto de la clase Spectrum, una vez instanciado, puede generar calcular una serie de puntos 
-mediante la función "getPoints()". Este cálculo se basa en una serie de puntos pre-calculados como
+Cualquier objeto de la clase Spectrum, una vez instanciado, puede calcular una serie de puntos 
+mediante la función "getPoints()". Este cálculo se hace en función de una serie de puntos pre-calculados como
 equidistantes en el eje x en escala logarítmica::
 
 	var points = esp.getPoints();
 	
-El archivo "microzonelib.js" crea un objeto global llamado ``microzonelib``, el cual debe inicializarse
-con el método init(), recibiendo opcionalmente un grupo de opciones iniciales. Las opciones por defecto son las siguientes::
+El archivo "microzonelib.js" define un objeto global (módulo) llamado ``microzonelib``, el cual debe inicializarse
+con el método init(), recibiendo opcionalmente un grupo de configuraciones iniciales. Las opciones por defecto son las siguientes::
 
 	config = {
 		geoserver_url : 'http://localhost:8080/geoserver/Microzonas/wms',
@@ -138,3 +137,15 @@ son correctas, no necesita hacerse nada más. Sin embargo, se definen también l
 * plot(spectrum): grafica un espectro específico (debidamente instanciado).
 * request_zone(zone_id): solicita los atributos de una microzona específica.
 * show_map(map_div): despliega un mapa usando OpenLayers en el div especificado.
+
+La biblioteca de microzonas tiene las siguientes dependencias:
+
+* OpenLayers: biblioteca para desplegar mapas (http://openlayers.org/).
+* JQuery: extensión de herramientas diversas para javascript (http://jquery.com/).
+* JQuery-UI: biblioteca para aplicar efectos visuales a la interfaz de usuario (http://jqueryui.com/).
+* JqPlot: biblioteca para graficación (http://www.jqplot.com/). Con los siguientes plugins:
+	- logAxisRenderer
+	- canvasAxisTickRenderer
+	- canvasTextRenderer
+	- cursor
+
