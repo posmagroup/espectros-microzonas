@@ -53,11 +53,31 @@ apreciar el proyecto desde el punto de vista del usuario.
 Pre-requisitos
 ===============
 
-Debe existir una instancia de GeoServer corriendo en un servidor. Para
-identificar esta instancia, deben establecerse el siguiente valor de configuración:
+Debe existir una instancia de GeoServer corriendo en el servidor. Para esto, se requiere instalar las siguientes 
+aplicaciones:
 
-* GEOSERVER_URL: que representa la URL con la que el proyecto identifica
-  a la instancia de GeoServer.
+* Tomcat 7: http://tomcat.apache.org/
+* Geoserver 2.3.0 (web archive): http://geoserver.org/
+* CORS Filter: http://software.dzhuvinov.com/cors-filter.html
+
+Una vez instalado el Tomcat, Geoserver debe instalarse como una aplicación web dentro del tomcat 
+(debe ir dentro de la carpeta webapps). Luego debe instalarse el CORS-filter, esto se hace poniendo el respectivo archivo
+.jar en la carpeta "lib" del Tomcat, y luego debe añadirse lo siguiente en el web.xml::
+
+	<filter>
+		<filter-name>CORS</filter-name>
+		<filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+        <filter-name>CORS</filter-name>
+        <url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+Esto debe agregarse al final del archivo, justo antes de cerrar la etiqueta ``</web-app>``.
+
+Posteriormente, desde el proyecto Django, debe identificarse el URL del servicio de Geoserver estableciendo 
+el valor ``GEOSERVER_URL`` en el archivo settings.py.
 
 Adicionalmente, debe establecerse el valor de la configuración
 ``settings.MICROZONE_LAYERS`` como una lista de tuplas de tres cadenas.
