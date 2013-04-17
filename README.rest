@@ -85,8 +85,13 @@ tal cual aparece en la base de datos de atributos.
 Bibliotecas Javascript
 ======================
 
-Se incluyen en el proyecto dos archivos .js: "spectrum.js" y "microzonelib.js". En "spectrum.js" 
-se define la clase Spectrum, que corresponde al cálculo de la función de espectro de una microzona.
+Se incluyen en el proyecto dos archivos .js: "spectrum.js" y "microzonelib.js". 
+
+Una vez incluidos los archivos .js en la cabecera del html principal, éste debe definir los ``div`` "map" y "dialog"
+como se muestran en index.html.
+
+
+En "spectrum.js" se define la clase Spectrum, que corresponde al cálculo de la función de espectro de una microzona.
 
 La clase debe instanciarse con los atributos principales de la microzona y su nombre::
 
@@ -103,6 +108,33 @@ equidistantes en el eje x en escala logarítmica::
 	var points = esp.getPoints();
 	
 El archivo "microzonelib.js" crea un objeto global llamado ``microzonelib``, el cual debe inicializarse
-con el método init(), recibiendo opcionalmente un grupo de opciones iniciales.
+con el método init(), recibiendo opcionalmente un grupo de opciones iniciales. Las opciones por defecto son las siguientes::
+
+	config = {
+		geoserver_url : 'http://localhost:8080/geoserver/Microzonas/wms',
+		parameters_service : '/getmicrozone/',
+		microzone_layers : [
+			['Laderas', 'Microzonas:Microzonas_Laderas', 'Amenaza'],
+			['Sedimentos', 'Microzonas:Microzonas_Sedimentos', 'microzona'],
+			['Amenaza General', 'Microzonas:Microzonas_Amenaza_General', 'Microzonas']
+		],
+		map_div : 'map',
+		dialog_div : 'dialog',
+		chartdiv : 'chartdiv'
+	}
 	
+De no espeficarse un parámetro de configuración, la biblioteca asumirá estos valores por defecto. 
+En caso contrario, es importante que se definan todos los campos mencionados en el ejemplo.
+
+Para inicializar la biblioteca debe invocarse el método público ``init()``::
+
+	microzonelib.init();
 	
+Este método se encarga de cargar el mapa usando OpenLayers y configura los eventos para detectar
+el click en las zonas. Si geoserver está debidamente instalado y las configuraciones en el init() 
+son correctas, no necesita hacerse nada más. Sin embargo, se definen también los siguientes métodos públicos:
+
+* set_config(conf): cambia el conjunto de configuraciones de la biblioteca.
+* plot(spectrum): grafica un espectro específico (debidamente instanciado).
+* request_zone(zone_id): solicita los atributos de una microzona específica.
+* show_map(map_div): despliega un mapa usando OpenLayers en el div especificado.
